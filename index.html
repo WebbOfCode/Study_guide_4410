@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSCI 4410 Web Technologies - Interactive Study Guide</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!--
+    ═══════════════════════════════════════════════════════════════════
+    DEPLOYMENT INSTRUCTIONS FOR GITHUB PAGES
+    ═══════════════════════════════════════════════════════════════════
+    
+    1. Create a new GitHub repository (e.g., "csci-4410-study-guide")
+    
+    2. Push these three files to the repository:
+       git init
+       git add index.html style.css script.js
+       git commit -m "Initial commit: Interactive study guide"
+       git branch -M main
+       git remote add origin https://github.com/YOUR-USERNAME/REPO-NAME.git
+       git push -u origin main
+    
+    3. Enable GitHub Pages:
+       - Go to repository Settings → Pages
+       - Source: Deploy from a branch
+       - Branch: main → / (root) → Save
+    
+    4. Your site will be live at:
+       https://YOUR-USERNAME.github.io/REPO-NAME/
+    
+    5. Updates: Simply push new commits to automatically deploy changes.
+    
+    ═══════════════════════════════════════════════════════════════════
+    -->
+</head>
+<body>
+    <!-- Dark Mode Toggle - Persisted in localStorage so user preference is remembered -->
+    <button id="darkModeToggle" class="dark-mode-btn" aria-label="Toggle dark mode">
+        🌙 Dark Mode
+    </button>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar Navigation - Allows quick jumping to chapters and topics -->
+        <nav class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+            <div class="sidebar-header">
+                <h2>CSCI 4410</h2>
+                <p>Web Technologies</p>
+            </div>
+            
+            <!-- Search Box - Filters topics in real-time as user types -->
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="searchBox" 
+                    placeholder="🔍 Search topics..." 
+                    aria-label="Search topics"
+                >
+            </div>
+
+            <!-- Progress Dashboard - Shows study statistics to motivate learners -->
+            <div class="progress-dashboard">
+                <h3>📊 Your Progress</h3>
+                <div class="stat">
+                    <span class="stat-label">Completed:</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Study Streak:</span>
+                    <span id="streakCounter">0 days</span>
+                </div>
+                <div class="weak-topics">
+                    <strong>📌 Focus On:</strong>
+                    <ul id="weakTopicsList"></ul>
+                </div>
+            </div>
+
+            <!-- Mode Switcher - Toggle between different study modes -->
+            <div class="mode-switcher">
+                <button class="mode-btn active" data-mode="study" aria-label="Study mode">
+                    📚 Study
+                </button>
+                <button class="mode-btn" data-mode="flashcards" aria-label="Flashcard mode">
+                    🗂️ Flashcards
+                </button>
+                <button class="mode-btn" data-mode="quiz" aria-label="Quiz mode">
+                    ✅ Quiz
+                </button>
+                <button class="mode-btn" data-mode="demos" aria-label="Interactive demos">
+                    🎮 Demos
+                </button>
+            </div>
+
+            <!-- Navigation Links - Generated dynamically by JavaScript -->
+            <ul class="nav-links" id="navLinks"></ul>
+
+            <!-- Data Management - Export/Import allows backup and transfer of progress -->
+            <div class="data-controls">
+                <button id="exportBtn" class="control-btn">💾 Export Progress</button>
+                <button id="importBtn" class="control-btn">📂 Import Progress</button>
+                <input type="file" id="importFile" accept=".json" hidden>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="mainContent">
+            <!-- Study Mode - Default view showing all topics organized by chapter -->
+            <section id="studyMode" class="content-section active">
+                <header class="main-header">
+                    <h1>Interactive Study Guide</h1>
+                    <p class="subtitle">Master Web Technologies with hands-on learning</p>
+                </header>
+
+                <!-- Topics Container - Populated dynamically with topic cards -->
+                <div id="topicsContainer" class="topics-container"></div>
+            </section>
+
+            <!-- Flashcard Mode - Spaced repetition system for memorization -->
+            <section id="flashcardMode" class="content-section">
+                <div class="flashcard-container">
+                    <h2>🗂️ Flashcard Mode</h2>
+                    <p class="mode-description">Master concepts with spaced repetition</p>
+                    
+                    <div class="flashcard-controls">
+                        <span id="flashcardProgress">Card 0 of 0</span>
+                        <button id="shuffleCards" class="control-btn">🔀 Shuffle</button>
+                    </div>
+
+                    <!-- Flashcard Display - Click to flip between question and answer -->
+                    <div class="flashcard" id="flashcard">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <p id="flashcardQuestion">Click "Start" to begin</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <p id="flashcardAnswer"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard Actions - Track learning progress -->
+                    <div class="flashcard-actions">
+                        <button id="flipCard" class="btn btn-primary">🔄 Flip Card</button>
+                        <button id="knowIt" class="btn btn-success">✅ Know It</button>
+                        <button id="reviewAgain" class="btn btn-warning">🔁 Review Again</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz Mode - Test knowledge with instant feedback -->
+            <section id="quizMode" class="content-section">
+                <div class="quiz-container">
+                    <h2>✅ Quiz Mode</h2>
+                    <p class="mode-description">Test your knowledge and track improvement</p>
+
+                    <!-- Chapter Selector - Choose which chapter to quiz on -->
+                    <div class="quiz-selector">
+                        <label for="quizChapter">Select Chapter:</label>
+                        <select id="quizChapter">
+                            <option value="">Choose a chapter...</option>
+                        </select>
+                        <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+                    </div>
+
+                    <!-- Quiz Display - Shows questions one at a time -->
+                    <div id="quizArea" class="quiz-area">
+                        <div id="quizQuestion" class="quiz-question"></div>
+                        <div id="quizOptions" class="quiz-options"></div>
+                        <div id="quizFeedback" class="quiz-feedback"></div>
+                        <div class="quiz-navigation">
+                            <button id="nextQuestion" class="btn btn-primary" style="display: none;">
+                                Next Question →
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Score History - Shows improvement over time to motivate learners -->
+                    <div id="scoreHistory" class="score-history"></div>
+                </div>
+            </section>
+
+            <!-- Interactive Demos - Visual demonstrations of concepts -->
+            <section id="demosMode" class="content-section">
+                <div class="demos-container">
+                    <h2>🎮 Interactive Demos</h2>
+                    <p class="mode-description">See concepts in action</p>
+
+                    <!-- HTTP Request/Response Demo - Visualizes client-server communication -->
+                    <div class="demo-card">
+                        <h3>📡 HTTP Request/Response Demo</h3>
+                        <p>Simulate how browsers talk to servers</p>
+                        
+                        <div class="demo-content">
+                            <div class="http-demo">
+                                <div class="http-request">
+                                    <h4>Request</h4>
+                                    <label>Method:</label>
+                                    <select id="httpMethod">
+                                        <option>GET</option>
+                                        <option>POST</option>
+                                        <option>PUT</option>
+                                        <option>DELETE</option>
+                                    </select>
+                                    <label>URL:</label>
+                                    <input type="text" id="httpUrl" value="/api/users" />
+                                    <button id="sendRequest" class="btn btn-primary">Send Request</button>
+                                </div>
+                                <div class="http-response">
+                                    <h4>Response</h4>
+                                    <div id="httpResponseArea">
+                                        <p class="placeholder">Send a request to see response...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HTML Preview Demo - Safe HTML rendering for learning -->
+                    <div class="demo-card">
+                        <h3>🏗️ HTML Live Preview</h3>
+                        <p>Type HTML and see it render (safe preview mode)</p>
+                        
+                        <div class="demo-content">
+                            <div class="html-demo">
+                                <textarea 
+                                    id="htmlInput" 
+                                    placeholder="Try: <h1>Hello World</h1>"
+                                    rows="5"
+                                ></textarea>
+                                <button id="renderHtml" class="btn btn-primary">Render HTML</button>
+                                <div id="htmlOutput" class="html-output"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CSS Box Model Playground - Visual representation of spacing -->
+                    <div class="demo-card">
+                        <h3>📦 CSS Box Model Playground</h3>
+                        <p>Adjust margin, border, padding and see visual changes</p>
+                        
+                        <div class="demo-content">
+                            <div class="box-model-demo">
+                                <div class="controls-grid">
+                                    <div class="control-group">
+                                        <label>Margin: <span id="marginValue">20</span>px</label>
+                                        <input type="range" id="marginSlider" min="0" max="50" value="20">
+                                    </div>
+                                    <div class="control-group">
+                                        <label>Border: <span id="borderValue">5</span>px</label>
+                                        <input type="range" id="borderSlider" min="0" max="20" value="5">
+                                    </div>
+                                    <div class="control-group">
+                                        <label>Padding: <span id="paddingValue">30</span>px</label>
+                                        <input type="range" id="paddingSlider" min="0" max="50" value="30">
+                                    </div>
+                                </div>
+                                <div class="box-visual" id="boxVisual">
+                                    <div class="box-margin">
+                                        Margin
+                                        <div class="box-border">
+                                            Border
+                                            <div class="box-padding">
+                                                Padding
+                                                <div class="box-content">
+                                                    Content
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JavaScript DOM Demo - Interactive element manipulation -->
+                    <div class="demo-card">
+                        <h3>🎯 JavaScript DOM Demo</h3>
+                        <p>Manipulate elements using DOM methods</p>
+                        
+                        <div class="demo-content">
+                            <div class="dom-demo">
+                                <div id="demoElement" class="demo-element">
+                                    <h4 id="demoHeading">Hello DOM!</h4>
+                                    <p class="demo-text">I'm a paragraph.</p>
+                                    <p class="demo-text">I'm another paragraph.</p>
+                                </div>
+                                <div class="dom-controls">
+                                    <button class="btn btn-secondary" onclick="demoGetElementById()">
+                                        getElementById('demoHeading')
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="demoQuerySelector()">
+                                        querySelector('.demo-text')
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="demoQuerySelectorAll()">
+                                        querySelectorAll('.demo-text')
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="demoEventListener()">
+                                        addEventListener Demo
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="resetDemoElement()">
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1449 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ROOT VARIABLES - Using CSS custom properties for theming
+   This allows easy dark/light mode switching without duplicating styles
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+    /* Light Mode Colors */
+    --bg-primary: #f5f7fa;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #e9ecef;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --accent-primary: #3498db;
+    --accent-secondary: #2ecc71;
+    --accent-warning: #f39c12;
+    --accent-danger: #e74c3c;
+    --border-color: #dfe6e9;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow-hover: rgba(0, 0, 0, 0.15);
+    
+    /* Spacing System - Consistent spacing prevents layout chaos */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* Border Radius - Consistent roundness creates cohesive design */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    
+    /* Typography Scale - Harmonious proportions improve readability */
+    --font-base: 16px;
+    --font-sm: 0.875rem;
+    --font-md: 1rem;
+    --font-lg: 1.25rem;
+    --font-xl: 1.5rem;
+    --font-2xl: 2rem;
+}
+
+/* Dark Mode Variables - Applied when .dark-mode class is on body */
+body.dark-mode {
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-tertiary: #0f3460;
+    --text-primary: #eaeaea;
+    --text-secondary: #b4b4b4;
+    --accent-primary: #4a90e2;
+    --accent-secondary: #50c878;
+    --accent-warning: #ffb627;
+    --accent-danger: #ff6b6b;
+    --border-color: #2d3748;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-hover: rgba(0, 0, 0, 0.4);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   BASE STYLES - Foundation for consistent appearance
+   ═══════════════════════════════════════════════════════════════════ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Makes width/height calculations include padding/border */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-size: var(--font-base);
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    transition: background 0.3s ease, color 0.3s ease; /* Smooth theme transitions */
+}
+
+/* Smooth scrolling for anchor links - Better UX when navigating */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   DARK MODE TOGGLE BUTTON - Fixed position for easy access
+   ═══════════════════════════════════════════════════════════════════ */
+
+.dark-mode-btn {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000; /* Stays above all content */
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: var(--font-md);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.dark-mode-btn:hover {
+    transform: translateY(-2px); /* Subtle lift on hover indicates clickability */
+    box-shadow: 0 4px 12px var(--shadow-hover);
+}
+
+/* Focus styles for keyboard navigation - Accessibility requirement */
+.dark-mode-btn:focus {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   LAYOUT - Two-column responsive layout (sidebar + main content)
+   ═══════════════════════════════════════════════════════════════════ */
+
+.container {
+    display: flex;
+    min-height: 100vh; /* Full viewport height prevents awkward gaps */
+}
+
+/* Sidebar - Fixed width on desktop, collapses on mobile */
+.sidebar {
+    width: 300px;
+    background: var(--bg-secondary);
+    border-right: 2px solid var(--border-color);
+    padding: var(--spacing-md);
+    overflow-y: auto; /* Scrollable when content exceeds viewport */
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.sidebar-header {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.sidebar-header h2 {
+    color: var(--accent-primary);
+    font-size: var(--font-xl);
+}
+
+.sidebar-header p {
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+}
+
+/* Main Content - Flexible width, takes remaining space */
+.main-content {
+    flex: 1; /* Grows to fill available space */
+    padding: var(--spacing-lg);
+    max-width: 1200px; /* Prevents lines from becoming too long on wide screens */
+    margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SEARCH BOX - Real-time filtering of topics
+   ═══════════════════════════════════════════════════════════════════ */
+
+.search-container {
+    margin-bottom: var(--spacing-md);
+}
+
+#searchBox {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-size: var(--font-md);
+    transition: border 0.3s ease;
+}
+
+#searchBox:focus {
+    outline: none;
+    border-color: var(--accent-primary); /* Visual feedback on focus */
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   PROGRESS DASHBOARD - Motivates learners with visible progress
+   ═══════════════════════════════════════════════════════════════════ */
+
+.progress-dashboard {
+    background: var(--bg-tertiary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.progress-dashboard h3 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--accent-primary);
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-sm);
+}
+
+.stat-label {
+    color: var(--text-secondary);
+}
+
+.weak-topics {
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--border-color);
+}
+
+.weak-topics strong {
+    font-size: var(--font-sm);
+    color: var(--accent-warning);
+}
+
+.weak-topics ul {
+    list-style: none;
+    margin-top: var(--spacing-xs);
+}
+
+.weak-topics li {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    padding: var(--spacing-xs) 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MODE SWITCHER - Toggle between study modes
+   ═══════════════════════════════════════════════════════════════════ */
+
+.mode-switcher {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2x2 grid for 4 buttons */
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+.mode-btn {
+    padding: var(--spacing-sm);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: var(--font-sm);
+    transition: all 0.3s ease;
+}
+
+.mode-btn:hover {
+    background: var(--bg-tertiary);
+    transform: translateY(-1px);
+}
+
+.mode-btn.active {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.mode-btn:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   NAVIGATION LINKS - Chapter and topic navigation
+   ═══════════════════════════════════════════════════════════════════ */
+
+.nav-links {
+    list-style: none;
+    margin-bottom: var(--spacing-md);
+}
+
+.nav-links li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.nav-links a {
+    display: block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    font-size: var(--font-sm);
+}
+
+.nav-links a:hover {
+    background: var(--bg-tertiary);
+    padding-left: var(--spacing-md); /* Indent on hover shows interactivity */
+}
+
+.nav-links a:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* Chapter headers in navigation */
+.nav-chapter {
+    font-weight: bold;
+    color: var(--accent-primary);
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-xs) 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   DATA CONTROLS - Export/Import progress
+   ═══════════════════════════════════════════════════════════════════ */
+
+.data-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    padding-top: var(--spacing-md);
+    border-top: 2px solid var(--border-color);
+}
+
+.control-btn {
+    padding: var(--spacing-sm);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: var(--font-sm);
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.control-btn:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MAIN HEADER - Title and subtitle for each mode
+   ═══════════════════════════════════════════════════════════════════ */
+
+.main-header {
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.main-header h1 {
+    font-size: var(--font-2xl);
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: var(--font-lg);
+}
+
+.mode-description {
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CONTENT SECTIONS - Different modes (study, flashcards, quiz, demos)
+   Sections are hidden by default, shown when active
+   ═══════════════════════════════════════════════════════════════════ */
+
+.content-section {
+    display: none; /* Hidden by default */
+}
+
+.content-section.active {
+    display: block; /* Shown when active class is added */
+    animation: fadeIn 0.3s ease; /* Smooth appearance */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TOPIC CARDS - Individual cards for each concept
+   ═══════════════════════════════════════════════════════════════════ */
+
+.topics-container {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.chapter-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.chapter-header {
+    display: inline-block;
+    background: var(--accent-primary);
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-lg);
+}
+
+.topic-card {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.topic-card:hover {
+    box-shadow: 0 4px 16px var(--shadow-hover);
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.topic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer; /* Indicates it's collapsible */
+    padding: var(--spacing-sm);
+    margin: calc(-1 * var(--spacing-md)); /* Expand clickable area */
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--radius-lg);
+}
+
+.topic-header:hover {
+    background: var(--bg-tertiary);
+}
+
+.topic-title {
+    font-size: var(--font-lg);
+    color: var(--accent-primary);
+    margin: 0;
+}
+
+.topic-toggle {
+    font-size: var(--font-xl);
+    transition: transform 0.3s ease;
+}
+
+.topic-toggle.open {
+    transform: rotate(180deg); /* Arrow flips when expanded */
+}
+
+/* Topic content sections - Each has color-coded icon */
+.topic-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease; /* Smooth collapse/expand */
+}
+
+.topic-content.open {
+    max-height: 2000px; /* Large enough for any content */
+}
+
+.topic-section {
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--accent-primary);
+}
+
+.section-title {
+    font-weight: bold;
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.topic-section p {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Code examples - Monospace font with distinct background */
+.code-example {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-sm);
+    font-family: 'Courier New', monospace;
+    font-size: var(--font-sm);
+    overflow-x: auto; /* Scrollable for long code */
+    margin: var(--spacing-xs) 0;
+}
+
+/* Common mistake comparison - Shows right vs wrong */
+.mistake-comparison {
+    display: grid;
+    gap: var(--spacing-sm);
+}
+
+.mistake-item {
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+}
+
+.mistake-item.wrong {
+    background: rgba(231, 76, 60, 0.1);
+    border-left: 4px solid var(--accent-danger);
+}
+
+.mistake-item.right {
+    background: rgba(46, 204, 113, 0.1);
+    border-left: 4px solid var(--accent-secondary);
+}
+
+/* Self-check questions - Hidden until button clicked */
+.self-check {
+    margin-top: var(--spacing-sm);
+}
+
+.check-question {
+    font-weight: bold;
+    margin-bottom: var(--spacing-xs);
+    color: var(--accent-warning);
+}
+
+.check-answer {
+    display: none; /* Hidden by default */
+    padding: var(--spacing-sm);
+    background: var(--bg-primary);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-xs);
+    border-left: 4px solid var(--accent-secondary);
+}
+
+.check-answer.visible {
+    display: block;
+}
+
+.reveal-btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--accent-warning);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--font-sm);
+    transition: all 0.3s ease;
+}
+
+.reveal-btn:hover {
+    background: var(--accent-primary);
+    transform: scale(1.05);
+}
+
+/* Checkbox to mark topic as completed */
+.topic-checkbox {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm);
+    background: var(--bg-primary);
+    border-radius: var(--radius-md);
+    margin-top: var(--spacing-md);
+}
+
+.topic-checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.topic-checkbox label {
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FLASHCARD MODE - Card flipping and spaced repetition
+   ═══════════════════════════════════════════════════════════════════ */
+
+.flashcard-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.flashcard-container h2 {
+    text-align: center;
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.flashcard-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+}
+
+/* Flashcard with 3D flip effect */
+.flashcard {
+    width: 100%;
+    height: 400px;
+    perspective: 1000px; /* Creates 3D space for flip */
+    margin-bottom: var(--spacing-lg);
+    cursor: pointer;
+}
+
+.flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d; /* Maintains 3D during flip */
+}
+
+.flashcard.flipped .flashcard-inner {
+    transform: rotateY(180deg); /* Flip effect */
+}
+
+.flashcard-front,
+.flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hides back face during flip */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.flashcard-front p,
+.flashcard-back p {
+    font-size: var(--font-lg);
+    text-align: center;
+    line-height: 1.8;
+}
+
+.flashcard-back {
+    transform: rotateY(180deg); /* Pre-rotated so it appears correct when flipped */
+    background: var(--accent-primary);
+    color: white;
+}
+
+.flashcard-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   BUTTON STYLES - Consistent button appearance across modes
+   ═══════════════════════════════════════════════════════════════════ */
+
+.btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: var(--font-md);
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn:focus {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    background: var(--accent-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+.btn-secondary {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.btn-success {
+    background: var(--accent-secondary);
+    color: white;
+}
+
+.btn-success:hover {
+    background: #27ae60;
+    transform: translateY(-2px);
+}
+
+.btn-warning {
+    background: var(--accent-warning);
+    color: white;
+}
+
+.btn-warning:hover {
+    background: #e67e22;
+    transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   QUIZ MODE - Interactive questions with feedback
+   ═══════════════════════════════════════════════════════════════════ */
+
+.quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.quiz-container h2 {
+    text-align: center;
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.quiz-selector {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--border-color);
+}
+
+.quiz-selector label {
+    font-weight: bold;
+    align-self: center;
+}
+
+.quiz-selector select {
+    flex: 1;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-size: var(--font-md);
+}
+
+.quiz-area {
+    background: var(--bg-secondary);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--border-color);
+    min-height: 300px;
+}
+
+.quiz-question {
+    font-size: var(--font-lg);
+    font-weight: bold;
+    margin-bottom: var(--spacing-md);
+    color: var(--accent-primary);
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.quiz-option {
+    padding: var(--spacing-md);
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.quiz-option:hover {
+    background: var(--bg-primary);
+    border-color: var(--accent-primary);
+    transform: translateX(5px);
+}
+
+.quiz-option.selected {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.quiz-option.correct {
+    background: var(--accent-secondary);
+    color: white;
+    border-color: var(--accent-secondary);
+}
+
+.quiz-option.incorrect {
+    background: var(--accent-danger);
+    color: white;
+    border-color: var(--accent-danger);
+}
+
+.quiz-option:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Fill-in-the-blank input */
+.quiz-input {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-size: var(--font-md);
+}
+
+.quiz-feedback {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    display: none; /* Hidden until answer is checked */
+}
+
+.quiz-feedback.visible {
+    display: block;
+}
+
+.quiz-feedback.correct {
+    background: rgba(46, 204, 113, 0.1);
+    border-left: 4px solid var(--accent-secondary);
+    color: var(--accent-secondary);
+}
+
+.quiz-feedback.incorrect {
+    background: rgba(231, 76, 60, 0.1);
+    border-left: 4px solid var(--accent-danger);
+    color: var(--accent-danger);
+}
+
+.quiz-navigation {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--spacing-md);
+}
+
+.score-history {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--border-color);
+}
+
+.score-history h3 {
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-xs);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   DEMOS MODE - Interactive demonstrations
+   ═══════════════════════════════════════════════════════════════════ */
+
+.demos-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.demos-container h2 {
+    text-align: center;
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.demo-card {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.demo-card h3 {
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.demo-card > p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.demo-content {
+    background: var(--bg-tertiary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+}
+
+/* HTTP Demo - Request/Response visualization */
+.http-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+.http-request,
+.http-response {
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+}
+
+.http-request h4,
+.http-response h4 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--accent-primary);
+}
+
+.http-request label {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-weight: bold;
+    color: var(--text-secondary);
+}
+
+.http-request select,
+.http-request input {
+    width: 100%;
+    padding: var(--spacing-xs);
+    margin-top: var(--spacing-xs);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+#httpResponseArea {
+    min-height: 200px;
+    padding: var(--spacing-sm);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-sm);
+    font-family: 'Courier New', monospace;
+    font-size: var(--font-sm);
+}
+
+.placeholder {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* HTML Demo - Live preview */
+.html-demo {
+    display: grid;
+    gap: var(--spacing-sm);
+}
+
+#htmlInput {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+    resize: vertical;
+}
+
+.html-output {
+    min-height: 150px;
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border: 2px solid var(--accent-secondary);
+    border-radius: var(--radius-md);
+}
+
+/* Box Model Demo - Visual representation */
+.box-model-demo {
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.controls-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-sm);
+}
+
+.control-group {
+    padding: var(--spacing-sm);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-sm);
+    font-weight: bold;
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+}
+
+.box-visual {
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.box-margin {
+    background: #f39c12;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-weight: bold;
+    border-radius: var(--radius-sm);
+}
+
+.box-border {
+    background: #e74c3c;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--radius-sm);
+}
+
+.box-padding {
+    background: #2ecc71;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--radius-sm);
+}
+
+.box-content {
+    background: #3498db;
+    padding: 40px;
+    border-radius: var(--radius-sm);
+}
+
+/* DOM Demo - Element manipulation */
+.dom-demo {
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.demo-element {
+    padding: var(--spacing-lg);
+    background: var(--bg-secondary);
+    border: 2px dashed var(--border-color);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.demo-element h4 {
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.demo-element p {
+    margin: var(--spacing-xs) 0;
+}
+
+.dom-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-xs);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN - Mobile-friendly adjustments
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+    /* Stack sidebar and content vertically on mobile */
+    .container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 2px solid var(--border-color);
+    }
+    
+    .main-content {
+        padding: var(--spacing-sm);
+    }
+    
+    /* Single column layouts on mobile */
+    .mode-switcher {
+        grid-template-columns: 1fr;
+    }
+    
+    .http-demo {
+        grid-template-columns: 1fr;
+    }
+    
+    .controls-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .dom-controls {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Adjust card heights for mobile */
+    .flashcard {
+        height: 300px;
+    }
+    
+    /* Smaller fonts on mobile */
+    .main-header h1 {
+        font-size: var(--font-xl);
+    }
+    
+    /* Dark mode button adjustment */
+    .dark-mode-btn {
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: var(--spacing-xs);
+        font-size: var(--font-sm);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   UTILITY CLASSES - Reusable helper classes
+   ═══════════════════════════════════════════════════════════════════ */
+
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: var(--spacing-sm); }
+.mt-2 { margin-top: var(--spacing-md); }
+.mb-1 { margin-bottom: var(--spacing-sm); }
+.mb-2 { margin-bottom: var(--spacing-md); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   ACCESSIBILITY - Enhanced keyboard and screen reader support
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Skip to main content link for keyboard users */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-primary);
+    color: white;
+    padding: var(--spacing-sm);
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Ensure all interactive elements have visible focus */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support for better visibility */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: currentColor;
+    }
+    
+    .topic-card,
+    .demo-card,
+    .quiz-area {
+        border-width: 3px;
+    }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FINAL POLISH OVERRIDES - Align style.css with script.js generated UI
+   WHY: script.js creates class names not covered in earlier styles.
+   These overrides ensure consistent final rendering before deployment.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.main-content {
+    width: 100%;
+}
+
+.chapter-section > h2 {
+    margin-bottom: var(--spacing-md);
+    color: var(--accent-primary);
+    font-size: var(--font-xl);
+}
+
+.topic-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.topic-card-header h3 {
+    font-size: var(--font-lg);
+    color: var(--text-primary);
+}
+
+.topic-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.toggle-details,
+.mark-complete,
+.reveal-answer,
+.quiz-option-btn {
+    border: 2px solid var(--border-color);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-details,
+.mark-complete,
+.reveal-answer {
+    padding: 0.45rem 0.75rem;
+    font-size: var(--font-sm);
+}
+
+.toggle-details:hover,
+.mark-complete:hover,
+.reveal-answer:hover,
+.quiz-option-btn:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-1px);
+}
+
+.mark-complete.done {
+    background: rgba(46, 204, 113, 0.18);
+    border-color: var(--accent-secondary);
+    color: var(--text-primary);
+}
+
+.topic-details {
+    margin-top: var(--spacing-sm);
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--spacing-sm);
+}
+
+.topic-details p {
+    margin-bottom: var(--spacing-sm);
+}
+
+.code-snippet {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm);
+    overflow-x: auto;
+    margin-bottom: var(--spacing-sm);
+}
+
+.code-snippet pre {
+    margin: 0;
+}
+
+.code-snippet code {
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: var(--font-sm);
+}
+
+.mistake-box {
+    border-left: 4px solid var(--accent-warning);
+    background: var(--bg-tertiary);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.self-answer {
+    margin-top: var(--spacing-xs);
+    background: var(--bg-tertiary);
+    border-left: 4px solid var(--accent-secondary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+}
+
+.nav-topic-list {
+    list-style: none;
+    margin: 0.2rem 0 0.6rem 0.9rem;
+}
+
+.chapter-link {
+    font-weight: 700;
+}
+
+.topic-link {
+    font-weight: 400;
+    opacity: 0.92;
+}
+
+.quiz-options > div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--spacing-xs);
+}
+
+.quiz-options input[type="text"] {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-size: var(--font-md);
+}
+
+.quiz-option-btn {
+    width: 100%;
+    text-align: left;
+    padding: var(--spacing-sm);
+}
+
+.quiz-option-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.quiz-feedback {
+    min-height: 3.25rem;
+    display: block;
+}
+
+.correct {
+    color: var(--accent-secondary);
+    font-weight: 700;
+}
+
+.incorrect {
+    color: var(--accent-danger);
+    font-weight: 700;
+}
+
+#flashcardAnswer,
+#flashcardQuestion {
+    word-break: break-word;
+}
+
+body.show-focus-outlines :focus {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 270px;
+    }
+
+    .main-content {
+        max-width: none;
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding-top: 3.75rem;
+    }
+
+    .topic-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .topic-actions {
+        width: 100%;
+    }
+
+    .topic-actions button {
+        flex: 1;
+    }
+
+    .quiz-selector {
+        flex-direction: column;
+    }
+
+    .quiz-options > div {
+        grid-template-columns: 1fr;
+    }
+}
