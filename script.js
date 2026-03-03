@@ -287,32 +287,110 @@ const chapters = [
 
 const quizzes = {
   ch1: [
-    { type: "mcq", question: "What does IP mainly handle?", options: ["Styling", "Addressing and routing", "Animations", "Storage"], answer: "Addressing and routing", explanation: "IP is responsible for identifying destination addresses and routing packets.", topicId: "tcp-ip" },
-    { type: "tf", question: "IPv6 was introduced partly because IPv4 addresses are limited.", answer: "True", explanation: "True. IPv6 greatly expands available address space.", topicId: "ipv4-vs-ipv6" },
-    { type: "fill", question: "HTTP stands for HyperText _____ Protocol.", answer: "Transfer", explanation: "The full term is HyperText Transfer Protocol.", topicId: "http" },
-    { type: "mcq", question: "The WWW is best described as:", options: ["All electricity networks", "A system of linked web resources", "A programming language", "A database"], answer: "A system of linked web resources", explanation: "The web is a linked information system accessible through browsers.", topicId: "www" },
-    { type: "mcq", question: "Which is a valid IPv4 style address?", options: ["2001:db8::1", "192.168.1.20", "site/home", "HTTP://"], answer: "192.168.1.20", explanation: "IPv4 uses dotted decimal format.", topicId: "ipv4-vs-ipv6" }
+    { type: "mcq", question: "What does IP mainly handle?", options: ["Styling", "Addressing and routing", "Animations", "Storage"], answer: "Addressing and routing", explanation: "IP is responsible for identifying destination addresses and routing packets across networks.", topicId: "tcp-ip" },
+    { type: "mcq", question: "What does TCP mainly ensure?", options: ["Visual display", "Reliable ordered delivery", "Data encryption", "Bandwidth control"], answer: "Reliable ordered delivery", explanation: "TCP guarantees data arrives in order and without loss.", topicId: "tcp-ip" },
+    { type: "tf", question: "TCP/IP requires both protocols to work together.", answer: "True", explanation: "TCP handles transport; IP handles routing. Both are essential.", topicId: "tcp-ip" },
+    { type: "fill", question: "A _____ is a unique number assigned to each device on a network.", answer: "IP address", explanation: "IP addresses identify devices; IPv4 uses 32-bit, IPv6 uses 128-bit addresses.", topicId: "ipv4-vs-ipv6" },
+    { type: "mcq", question: "IPv4 addresses are limited to approximately:", options: ["4 billion", "1 trillion", "1 million", "No limit"], answer: "4 billion", explanation: "IPv4 has 2^32 addresses (~4.3 billion). IPv6 has 2^128 for far more devices.", topicId: "ipv4-vs-ipv6" },
+    { type: "tf", question: "IPv6 was designed as a direct replacement for IPv4.", answer: "True", explanation: "IPv6 solves IPv4 address exhaustion but takes time to deploy worldwide.", topicId: "ipv4-vs-ipv6" },
+    { type: "mcq", question: "Which correctly shows an IPv6 address format?", options: ["192.168.1.1", "2001:db8::1", "256.256.256.256", "192.168"], answer: "2001:db8::1", explanation: "IPv6 uses hexadecimal notation with colons; :: represents consecutive zeros.", topicId: "ipv4-vs-ipv6" },
+    { type: "mcq", question: "The World Wide Web was invented to solve what problem?", options: ["Network speed", "Easy information sharing", "Device compatibility", "Password security"], answer: "Easy information sharing", explanation: "WWW provided a user-friendly hyperlinked interface to internet resources.", topicId: "www" },
+    { type: "tf", question: "The internet and the World Wide Web are the same thing.", answer: "False", explanation: "The internet is the global network infrastructure; WWW is a service on top.", topicId: "www" },
+    { type: "mcq", question: "What makes the WWW different from other internet services?", options: ["Uses hyperlinks", "Requires special hardware", "No server involved", "Text-only"], answer: "Uses hyperlinks", explanation: "Hyperlinks let users navigate between interconnected web pages.", topicId: "www" },
+    { type: "fill", question: "HTTP stands for HyperText _____ Protocol.", answer: "Transfer", explanation: "HTTP defines how browsers request and servers deliver web content.", topicId: "http" },
+    { type: "mcq", question: "What is the primary purpose of HTTP?", options: ["Encrypt data", "Request/deliver web resources", "Manage network cables", "Store files"], answer: "Request/deliver web resources", explanation: "HTTP is the request-response protocol used by web browsers and servers.", topicId: "http" },
+    { type: "tf", question: "HTTP is a stateless protocol.", answer: "True", explanation: "Each HTTP request is independent; the server doesn't retain session memory by default.", topicId: "http" },
+    { type: "mcq", question: "Which HTTP method is typically used to retrieve a webpage?", options: ["POST", "GET", "DELETE", "PUT"], answer: "GET", explanation: "GET requests data without modifying server state.", topicId: "http" },
+    { type: "mcq", question: "A browser makes an HTTP request and receives a _____ back.", options: ["Packet", "Response", "Signal", "Frame"], answer: "Response", explanation: "HTTP responses contain status codes, headers, and a body (usually HTML).", topicId: "http" },
+    { type: "fill", question: "An HTTP status code of 404 means _____.", answer: "Not Found", explanation: "404 indicates the requested resource does not exist on the server.", topicId: "http" },
+    { type: "mcq", question: "What does TCP/IP model describe?", options: ["Website design", "Communication layers for networks", "Database structure", "Hardware only"], answer: "Communication layers for networks", explanation: "TCP/IP is a layered model defining how data is transmitted across networks.", topicId: "tcp-ip" },
+    { type: "tf", question: "IPv4 and IPv6 can coexist on the same network.", answer: "True", explanation: "Dual-stack networks support both IPv4 and IPv6 simultaneously during transition.", topicId: "ipv4-vs-ipv6" },
+    { type: "mcq", question: "Which device needs an IP address?", options: ["Only computers", "Any device connecting to a network", "Only servers", "Only routers"], answer: "Any device connecting to a network", explanation: "Every network device (phone, computer, printer, IoT device) needs a unique IP.", topicId: "ipv4-vs-ipv6" },
+    { type: "mcq", question: "What happens when you click a hyperlink on a webpage?", options: ["Your browser makes an HTTP GET request", "Data is automatically downloaded", "The server shuts down", "Nothing technical"], answer: "Your browser makes an HTTP GET request", explanation: "Clicking a link triggers an HTTP request to fetch the linked resource.", topicId: "http" },
+    { type: "fill", question: "The part of TCP/IP that handles reliable delivery is _____.", answer: "TCP", explanation: "TCP (Transmission Control Protocol) ensures all packets arrive in order.", topicId: "tcp-ip" },
+    { type: "mcq", question: "Which layer delivers packets to the correct physical address?", options: ["Application", "Transport", "Internet", "Link"], answer: "Internet", explanation: "IP works at the Internet layer, handling destination addressing and routing.", topicId: "tcp-ip" },
+    { type: "tf", question: "Routers use IP addresses to forward data packets.", answer: "True", explanation: "Routers examine IP headers to determine where packets should go next.", topicId: "ipv4-vs-ipv6" },
+    { type: "mcq", question: "Why is HTTPS often preferred over HTTP?", options: ["Faster speed", "Encrypted connection", "Better design", "Fewer features"], answer: "Encrypted connection", explanation: "HTTPS adds SSL/TLS encryption to protect data in transit.", topicId: "http" },
+    { type: "fill", question: "DNS converts human-readable _____ into IP addresses.", answer: "domain names", explanation: "Domain Name System (DNS) translates URLs like google.com to numeric IP addresses.", topicId: "tcp-ip" }
   ],
   ch2: [
-    { type: "mcq", question: "HTML is primarily used to:", options: ["Style pages", "Structure content", "Handle server security", "Compress images"], answer: "Structure content", explanation: "HTML defines the structure and meaning of page content.", topicId: "what-is-html" },
-    { type: "tf", question: "An attribute gives extra information about an element.", answer: "True", explanation: "True. Attributes add details such as href, src, class, and id.", topicId: "tags-elements-attributes" },
-    { type: "fill", question: "The hyperlink tag is <___>.", answer: "a", explanation: "Anchor tag <a> creates links.", topicId: "core-text-and-links" },
-    { type: "mcq", question: "Which tag is best for unordered bullets?", options: ["<ol>", "<ul>", "<table>", "<form>"], answer: "<ul>", explanation: "Use <ul> for unordered lists.", topicId: "images-lists-tables" },
-    { type: "mcq", question: "Which form pairing is best practice?", options: ["Input only", "Label + input", "Button only", "Comment only"], answer: "Label + input", explanation: "Labels improve accessibility and clarity for users.", topicId: "forms-and-comments" }
+    { type: "mcq", question: "HTML is primarily used to:", options: ["Style pages", "Structure content", "Handle security", "Optimize speed"], answer: "Structure content", explanation: "HTML provides semantic structure; CSS styles, JavaScript adds behavior.", topicId: "what-is-html" },
+    { type: "tf", question: "HTML can make a webpage look beautiful on its own.", answer: "False", explanation: "HTML provides structure only. CSS is needed for styling and visual design.", topicId: "what-is-html" },
+    { type: "mcq", question: "What is the main difference between semantic and non-semantic HTML?", options: ["Semantic is faster", "Semantic clearly describes content meaning", "Non-semantic is more stylish", "No real difference"], answer: "Semantic clearly describes content meaning", explanation: "Semantic tags like <header>, <nav>, <article> convey meaning to browsers and developers.", topicId: "what-is-html" },
+    { type: "fill", question: "An HTML _____ is a container that indicates content type (heading, paragraph, etc).", answer: "tag", explanation: "Tags like <p>, <h1>, <div> define different types of content.", topicId: "tags-elements-attributes" },
+    { type: "mcq", question: "A complete HTML tag + content is called an:", options: ["Attribute", "Element", "Property", "Node"], answer: "Element", explanation: "An element is a complete unit: opening tag + content + closing tag.", topicId: "tags-elements-attributes" },
+    { type: "tf", question: "Attributes can only be added to certain HTML elements.", answer: "True", explanation: "Some attributes are global (apply to all), others are specific to certain elements.", topicId: "tags-elements-attributes" },
+    { type: "mcq", question: "In <a href='page.html'>Link</a>, what is 'href'?", options: ["An element", "A tag", "An attribute", "Content"], answer: "An attribute", explanation: "href is an attribute providing extra info (the URL) for the <a> element.", topicId: "tags-elements-attributes" },
+    { type: "fill", question: "The <h1> tag creates a _____ heading.", options: ["level 1", "first", "main", "primary"], answer: "level 1", explanation: "<h1> through <h6> define heading levels; <h1> is the most important.", topicId: "core-text-and-links" },
+    { type: "mcq", question: "How many <h1> tags should typically appear on a webpage?", options: ["Zero", "One", "Multiple", "Depends on page"], answer: "One", explanation: "Best practice: one <h1> per page representing the main title for SEO and accessibility.", topicId: "core-text-and-links" },
+    { type: "tf", question: "Paragraphs are created with the <p> tag.", answer: "True", explanation: "<p> wraps text in a paragraph with automatic spacing above and below.", topicId: "core-text-and-links" },
+    { type: "fill", question: "The _____ tag creates a hyperlink to another page.", answer: "a", explanation: "The anchor tag <a> with href attribute links to other resources.", topicId: "core-text-and-links" },
+    { type: "mcq", question: "Which attribute is required for a functional link?", options: ["title", "href", "class", "id"], answer: "href", explanation: "The href attribute specifies the link destination URL.", topicId: "core-text-and-links" },
+    { type: "mcq", question: "The <img> tag requires which attribute to work properly?", options: ["title", "width", "src", "link"], answer: "src", explanation: "src specifies the image file path; alt provides accessible text description.", topicId: "images-lists-tables" },
+    { type: "tf", question: "The alt attribute for images is optional.", answer: "False", explanation: "alt is essential for accessibility, SEO, and displays if image fails to load.", topicId: "images-lists-tables" },
+    { type: "fill", question: "Use the <___> tag for an unordered (bulleted) list.", answer: "ul", explanation: "<ul> contains <li> items for bullet points; <ol> is for numbered lists.", topicId: "images-lists-tables" },
+    { type: "mcq", question: "What is the purpose of <table> in HTML?", options: ["Page layout", "Data organization in rows/columns", "Styling", "Navigation"], answer: "Data organization in rows/columns", explanation: "Tables display structured data; <tr> for rows, <td> for cells.", topicId: "images-lists-tables" },
+    { type: "tf", question: "Tables should be used for webpage layout design.", answer: "False", explanation: "Tables are for tabular data only. CSS Flexbox/Grid is better for layout.", topicId: "images-lists-tables" },
+    { type: "mcq", question: "A form is used to:", options: ["Display images", "Collect user input", "Create links", "Apply colors"], answer: "Collect user input", explanation: "Forms gather user data via inputs, textareas, selects, etc.", topicId: "forms-and-comments" },
+    { type: "fill", question: "A form sends data using a _____ attribute on the <form> tag.", answer: "action", explanation: "The action attribute specifies where form data is sent (a URL/endpoint).", topicId: "forms-and-comments" },
+    { type: "mcq", question: "Which tag pairs input fields with descriptive text?", options: ["<span>", "<label>", "<div>", "<p>"], answer: "<label>", explanation: "<label> associates text with form inputs, improving usability and accessibility.", topicId: "forms-and-comments" },
+    { type: "tf", question: "HTML comments are visible to website visitors.", answer: "False", explanation: "<!-- Comments --> are only visible in the HTML source code, not rendered.", topicId: "forms-and-comments" },
+    { type: "mcq", question: "What makes an HTML document valid?", options: ["Uses many tags", "Proper DOCTYPE and structure", "Has a title", "No rules needed"], answer: "Proper DOCTYPE and structure", explanation: "Valid HTML includes <!DOCTYPE html>, <html>, <head>, <body> elements.", topicId: "what-is-html" },
+    { type: "fill", question: "The <___> tag contains metadata and links to stylesheets.", answer: "head", explanation: "The <head> section includes <title>, <meta>, <link> for CSS, and <script> for JS.", topicId: "what-is-html" },
+    { type: "mcq", question: "Which tag should wrap the visible page content?", options: ["<head>", "<body>", "<html>", "<main>"], answer: "<body>", explanation: "<body> contains all content visible to users (text, images, forms, etc).", topicId: "what-is-html" }
   ],
   ch3: [
-    { type: "mcq", question: "For larger projects, which CSS method is preferred?", options: ["Inline", "External", "Internal only", "No CSS"], answer: "External", explanation: "External stylesheets keep styling organized and reusable.", topicId: "inline-internal-external" },
-    { type: "tf", question: "Class selectors start with #.", answer: "False", explanation: "Class selectors use ., while # is for ID selectors.", topicId: "selectors" },
-    { type: "fill", question: "Space outside the border is called _____.", answer: "margin", explanation: "Margin is outside border; padding is inside border.", topicId: "box-model" },
-    { type: "mcq", question: "Which display value usually starts on a new line?", options: ["inline", "block", "none", "initial"], answer: "block", explanation: "Block-level elements generally occupy a full line.", topicId: "display" },
-    { type: "mcq", question: "Which property is used with floats to stop wrapping?", options: ["clear", "z-index", "opacity", "overflow-x"], answer: "clear", explanation: "clear controls how an element interacts with floated elements.", topicId: "float-clear-position" }
+    { type: "mcq", question: "For larger projects, which CSS method is most maintainable?", options: ["Inline", "External file", "Internal block", "Mixed"], answer: "External file", explanation: "External .css files keep styles organized and reusable across pages.", topicId: "inline-internal-external" },
+    { type: "tf", question: "Inline CSS (style attribute) is the best approach for large websites.", answer: "False", explanation: "Inline CSS is hard to maintain, duplicates code, and violates separation of concerns.", topicId: "inline-internal-external" },
+    { type: "mcq", question: "Internal CSS is defined in:", options: ["A separate .css file", "A <style> block in HTML", "HTML attributes", "JavaScript"], answer: "A <style> block in HTML", explanation: "Internal styles appear in the <head> section; useful for single-page styles.", topicId: "inline-internal-external" },
+    { type: "fill", question: "A _____ selects elements to apply styles to them.", answer: "selector", explanation: "Selectors (element, class, id, etc) tell CSS which elements to style.", topicId: "selectors" },
+    { type: "mcq", question: "Which selector targets elements by class name?", options: ["# symbol", ". symbol", ": symbol", "* symbol"], answer: ". symbol", explanation: ".classname targets all elements with that class; classes can be reused.", topicId: "selectors" },
+    { type: "mcq", question: "Which selector targets a unique element by ID?", options: [".id-name", "#id-name", ":id-name", "id-name"], answer: "#id-name", explanation: "#idname targets one unique element; IDs should only appear once per page.", topicId: "selectors" },
+    { type: "tf", question: "An ID can be used on multiple elements on the same page.", answer: "False", explanation: "IDs must be unique per page; use classes if you need to apply the same style to multiple elements.", topicId: "selectors" },
+    { type: "mcq", question: "A group selector (h1, h2, p) applies styles to:", options: ["Only h1", "All three element types", "The first match", "Nothing"], answer: "All three element types", explanation: "Grouping selectors with commas applies the same style to multiple selectors.", topicId: "selectors" },
+    { type: "fill", question: "The CSS box model consists of content, padding, _____, and margin.", answer: "border", explanation: "Order from inside: content → padding → border → margin.", topicId: "box-model" },
+    { type: "mcq", question: "Which part of the box model is between content and border?", options: ["Margin", "Padding", "Border", "Outline"], answer: "Padding", explanation: "Padding is inside space; margin is outside space (beyond the border).", topicId: "box-model" },
+    { type: "tf", question: "Margin and padding do the same thing.", answer: "False", explanation: "Padding is inside the border; margin is outside the border creating external space.", topicId: "box-model" },
+    { type: "mcq", question: "What does width: 300px set in the box model?", options: ["Entire element including margin", "Content area only (by default)", "Content + padding", "Content + border"], answer: "Content area only (by default)", explanation: "By default, width sets content width. Use box-sizing: border-box to include padding/border.", topicId: "box-model" },
+    { type: "fill", question: "The _____ property controls how an element participates in layout flow.", answer: "display", explanation: "display values (block, inline, inline-block, flex, grid) determine element behavior.", topicId: "display" },
+    { type: "mcq", question: "A block element typically:", options: ["Shares a line with other elements", "Takes up full available width", "Cannot have width/height", "Is invisible"], answer: "Takes up full available width", explanation: "Block elements (p, div, h1) start on new lines and stretch horizontally.", topicId: "display" },
+    { type: "tf", question: "Inline elements can have width and height properties applied.", answer: "False", explanation: "Inline elements ignore width/height; use inline-block or block for sizing control.", topicId: "display" },
+    { type: "mcq", question: "Which display value allows width/height AND inline flow?", options: ["block", "inline", "inline-block", "hidden"], answer: "inline-block", explanation: "inline-block combines inline flow with block-level sizing capabilities.", topicId: "display" },
+    { type: "fill", question: "The _____ property moves an element to screen edges and wraps text around it.", answer: "float", explanation: "float: left/right removes elements from normal flow; other elements wrap beside them.", topicId: "float-clear-position" },
+    { type: "mcq", question: "What does the clear property do?", options: ["Deletes CSS rules", "Prevents wrapping around floats", "Hides elements", "Resets styles"], answer: "Prevents wrapping around floats", explanation: "clear: left/right/both prevents an element from sitting beside floated content.", topicId: "float-clear-position" },
+    { type: "tf", question: "position: absolute removes an element from normal document flow.", answer: "True", explanation: "Absolute positioning takes elements out of flow; use relative/fixed/sticky for alternatives.", topicId: "float-clear-position" },
+    { type: "mcq", question: "position: relative moves elements while keeping their space in flow.", options: ["True", "False"], answer: "True", explanation: "Relative positioning offset elements visually but reserves their original space.", topicId: "float-clear-position" },
+    { type: "fill", question: "The property _____ controls layering depth when elements overlap.", answer: "z-index", explanation: "z-index: higher values appear on top; only works with positioned elements.", topicId: "float-clear-position" },
+    { type: "mcq", question: "What does opacity: 0.5 do?", options: ["Hides element", "Makes element 50% transparent", "Removes element", "Disables interaction"], answer: "Makes element 50% transparent", explanation: "opacity: 0 is invisible; 1 is fully opaque; 0.5 is 50% transparency.", topicId: "float-clear-position" },
+    { type: "tf", question: "CSS selectors are case-sensitive for class and id names.", answer: "True", explanation: ".MyClass and .myclass are different selectors in CSS.", topicId: "selectors" },
+    { type: "mcq", question: "Specificity in CSS determines:", options: ["Color brightness", "Which rule wins when conflicts exist", "Page loading speed", "Font size"], answer: "Which rule wins when conflicts exist", explanation: "Higher specificity wins: !important > IDs > classes > elements.", topicId: "selectors" }
   ],
   ch4: [
-    { type: "mcq", question: "Which keyword is best for a value that should not change?", options: ["var", "let", "const", "new"], answer: "const", explanation: "const prevents reassignment and clarifies intent.", topicId: "syntax-variables-comments" },
-    { type: "mcq", question: "Which array method removes the last item?", options: ["push", "pop", "shift", "sort"], answer: "pop", explanation: "pop removes and returns the last element.", topicId: "arrays-methods" },
-    { type: "tf", question: "forEach runs a callback for each array item.", answer: "True", explanation: "True. forEach is an array iteration method.", topicId: "conditionals-loops" },
-    { type: "fill", question: "To select one element by id, use document.__________.", answer: "getElementById", explanation: "getElementById returns an element by unique id.", topicId: "events-dom" },
-    { type: "mcq", question: "A constructor function is used to:", options: ["Delete arrays", "Create similar objects", "Style HTML", "Send HTTP only"], answer: "Create similar objects", explanation: "Constructors are templates for object creation.", topicId: "objects-constructors-functions" }
+    { type: "mcq", question: "Which keyword declares a variable that cannot be reassigned?", options: ["var", "let", "const", "static"], answer: "const", explanation: "const prevents reassignment, signaling intent and safer code.", topicId: "syntax-variables-comments" },
+    { type: "tf", question: "var, let, and const work exactly the same.", answer: "False", explanation: "var is function-scoped; let/const are block-scoped. const prevents reassignment.", topicId: "syntax-variables-comments" },
+    { type: "mcq", question: "A JavaScript comment starts with:", options: ["#", "//", "--", "/*"], answer: "//", explanation: "Single-line: // | Multi-line: /* */", topicId: "syntax-variables-comments" },
+    { type: "fill", question: "A variable name cannot start with a _____.", answer: "number", explanation: "Variable names must start with letter, $, or _. 'let 1name' is invalid.", topicId: "syntax-variables-comments" },
+    { type: "mcq", question: "What is an array in JavaScript?", options: ["A string of text", "An ordered list of values", "A single number", "A function"], answer: "An ordered list of values", explanation: "Arrays store multiple values: const arr = [1, 2, 3];", topicId: "arrays-methods" },
+    { type: "tf", question: "Array indices start at 1.", answer: "False", explanation: "Arrays are zero-indexed: arr[0] is first element, arr[1] is second.", topicId: "arrays-methods" },
+    { type: "mcq", question: "Which method adds an item to the end of an array?", options: ["unshift", "push", "pop", "shift"], answer: "push", explanation: "push() adds to end; unshift() adds to beginning.", topicId: "arrays-methods" },
+    { type: "fill", question: "The _____ method removes and returns the last array element.", answer: "pop", explanation: "pop() removes and returns the last item; shift() does the same for first.", topicId: "arrays-methods" },
+    { type: "mcq", question: "shift() does what to an array?", options: ["Adds to end", "Removes first item", "Sorts items", "Doubles length"], answer: "Removes first item", explanation: "shift() removes the first element; unshift() adds to the beginning.", topicId: "arrays-methods" },
+    { type: "mcq", question: "To sort an array of numbers correctly, you need:", options: ["arr.sort()", "arr.sort((a, b) => a - b)", "arr.reverse()", "arr.shuffle()"], answer: "arr.sort((a, b) => a - b)", explanation: "sort() without compare function sorts as strings; use compare for numbers.", topicId: "arrays-methods" },
+    { type: "tf", question: "For numeric sorting, arr.sort() works as expected.", answer: "False", explanation: "sort() sorts lexicographically (as text) by default; use compare function for numbers.", topicId: "arrays-methods" },
+    { type: "mcq", question: "An object groups related:", options: ["Numbers only", "Strings only", "Data and functions", "Loops"], answer: "Data and functions", explanation: "Objects hold key-value pairs: const user = { name: 'Ali', age: 20 };", topicId: "objects-constructors-functions" },
+    { type: "fill", question: "A _____ function creates similar objects from a template.", answer: "constructor", explanation: "Constructors (capitalized) initialize objects with shared structure.", topicId: "objects-constructors-functions" },
+    { type: "mcq", question: "You create an instance of a constructor using the _____ keyword.", options: ["new", "create", "init", "make"], answer: "new", explanation: "const obj = new ConstructorName(); creates a new instance.", topicId: "objects-constructors-functions" },
+    { type: "tf", question: "Functions can be stored in objects as properties.", answer: "True", explanation: "Functions as object properties are called methods, e.g., obj.method().", topicId: "objects-constructors-functions" },
+    { type: "mcq", question: "A function returns a value using the _____ keyword.", options: ["send", "give", "return", "output"], answer: "return", explanation: "return stops execution and sends a value back to the caller.", topicId: "objects-constructors-functions" },
+    { type: "fill", question: "An if/else statement executes code _____ (based on condition).", answer: "conditionally", explanation: "if (condition) { } runs when true; else { } runs when false.", topicId: "conditionals-loops" },
+    { type: "mcq", question: "Which comparison operator checks equality AND type?", options: ["==", "!=", "===", "="], answer: "===", explanation: "=== checks both value and type; == only value (loose equality).", topicId: "conditionals-loops" },
+    { type: "tf", question: "'5' === 5 evaluates to true.", answer: "False", explanation: "=== checks type: '5' (string) ≠ 5 (number), so result is false.", topicId: "conditionals-loops" },
+    { type: "fill", question: "A _____ loop repeats until its condition becomes false.", answer: "for", explanation: "for (let i = 0; i < 10; i++) loops 10 times with i incrementing.", topicId: "conditionals-loops" },
+    { type: "mcq", question: "forEach() is used to:", options: ["Find one item", "Run callback for each array element", "Sort items", "Delete items"], answer: "Run callback for each array element", explanation: "[1,2,3].forEach(n => console.log(n)); iterates and runs callback.", topicId: "conditionals-loops" },
+    { type: "mcq", question: "An event listener responds to user actions like:", options: ["Loading page only", "Click, input, mouseover", "Syntax errors", "File size"], answer: "Click, input, mouseover", explanation: "addEventListener attaches handlers: click, input, mouseover, change, etc.", topicId: "events-dom" },
+    { type: "fill", question: "The _____ property contains the entire page structure as a tree.", answer: "DOM", explanation: "The Document Object Model represents HTML as a navigable tree in JavaScript.", topicId: "events-dom" },
+    { type: "mcq", question: "document.getElementById('id') returns:", options: ["An array", "One element with that id", "All ids", "undefined"], answer: "One element with that id", explanation: "getElementById targets one element by unique id; returns null if not found.", topicId: "events-dom" },
+    { type: "fill", question: "The _____ method finds the first element matching a CSS selector.", answer: "querySelector", explanation: "querySelector('.class') or querySelector('#id') returns first match or null.", topicId: "events-dom" }
   ]
 };
 
@@ -668,19 +746,62 @@ const quizOptionsEl = document.getElementById("quizOptions");
 const quizFeedbackEl = document.getElementById("quizFeedback");
 const nextQuestionBtn = document.getElementById("nextQuestion");
 const scoreHistoryEl = document.getElementById("scoreHistory");
+const quizStats = document.getElementById("quizStats");
+const quizProgressBar = document.getElementById("quizProgressBar");
+const quizProgressFill = document.getElementById("quizProgressFill");
+const quizProgressText = document.getElementById("quizProgressText");
+const quizStreak = document.getElementById("quizStreak");
+const quizScoreDisplay = document.getElementById("quizScoreDisplay");
+const quizArea = document.getElementById("quizArea");
+const quizResults = document.getElementById("quizResults");
+const finalScoreEl = document.getElementById("finalScore");
+const scoreBreakdownEl = document.getElementById("scoreBreakdown");
+const performanceMessageEl = document.getElementById("performanceMessage");
+const restartQuizBtn = document.getElementById("restartQuiz");
+const reviewMistakesBtn = document.getElementById("reviewMistakes");
+const questionCategoryEl = document.getElementById("questionCategory");
+const questionTypeEl = document.getElementById("questionType");
 
 let activeQuizChapter = "";
 let activeQuestions = [];
 let activeQuestionIndex = 0;
 let activeScore = 0;
+let currentStreak = 0;
+let wrongAnswers = [];
+let isReviewMode = false;
 
 function renderQuizChapterOptions() {
   chapters.forEach((ch) => {
     const option = document.createElement("option");
     option.value = ch.id;
-    option.textContent = ch.title;
+    option.textContent = `${ch.title} (${quizzes[ch.id]?.length || 0} questions)`;
     quizChapterSelect.appendChild(option);
   });
+}
+
+function getTopicName(topicId) {
+  const topic = chapters.flatMap((ch) => ch.topics).find((t) => t.id === topicId);
+  return topic ? topic.term : topicId;
+}
+
+function getTypeLabel(type) {
+  const labels = { mcq: "Multiple Choice", tf: "True / False", fill: "Fill in Blank" };
+  return labels[type] || type.toUpperCase();
+}
+
+function getTypeIcon(type) {
+  const icons = { mcq: "🔘", tf: "☑️", fill: "✏️" };
+  return icons[type] || "❓";
+}
+
+function updateQuizProgress() {
+  const total = activeQuestions.length;
+  const progress = ((activeQuestionIndex + 1) / total) * 100;
+  
+  quizProgressText.textContent = `${activeQuestionIndex + 1} / ${total}`;
+  quizScoreDisplay.textContent = `${activeScore} / ${total}`;
+  quizStreak.textContent = currentStreak;
+  quizProgressFill.style.width = `${progress}%`;
 }
 
 function startQuiz() {
@@ -696,13 +817,35 @@ function startQuiz() {
   activeQuestions = [...quizzes[chapterId]];
   activeQuestionIndex = 0;
   activeScore = 0;
+  currentStreak = 0;
+  wrongAnswers = [];
+  isReviewMode = false;
+
+  // Show quiz UI, hide results
+  quizStats.style.display = "flex";
+  quizProgressBar.style.display = "block";
+  quizArea.style.display = "block";
+  quizResults.style.display = "none";
+  quizChapterSelect.parentElement.style.display = "none";
+  scoreHistoryEl.style.display = "none";
+  
   nextQuestionBtn.style.display = "none";
+  updateQuizProgress();
   renderQuizQuestion();
 }
 
 function renderQuizQuestion() {
-  quizFeedbackEl.textContent = "";
+  quizFeedbackEl.innerHTML = "";
+  quizFeedbackEl.className = "quiz-feedback";
   quizOptionsEl.innerHTML = "";
+  
+  // Animate card entrance
+  const quizCard = document.querySelector(".quiz-card");
+  if (quizCard) {
+    quizCard.style.animation = "none";
+    quizCard.offsetHeight; // Trigger reflow
+    quizCard.style.animation = "slideIn 0.3s ease-out";
+  }
 
   if (activeQuestionIndex >= activeQuestions.length) {
     finishQuiz();
@@ -710,18 +853,35 @@ function renderQuizQuestion() {
   }
 
   const q = activeQuestions[activeQuestionIndex];
-  quizQuestionEl.textContent = `Q${activeQuestionIndex + 1}: ${q.question}`;
+  const topicName = getTopicName(q.topicId);
+  
+  // Update category and type badges
+  questionCategoryEl.textContent = topicName;
+  questionTypeEl.innerHTML = `${getTypeIcon(q.type)} ${getTypeLabel(q.type)}`;
+  
+  quizQuestionEl.textContent = q.question;
 
   if (q.type === "fill") {
     const wrapper = document.createElement("div");
+    wrapper.className = "fill-blank-wrapper";
+    
     const input = document.createElement("input");
     input.type = "text";
-    input.placeholder = "Type your answer";
+    input.className = "fill-blank-input";
+    input.placeholder = "Type your answer here...";
     input.setAttribute("aria-label", "Fill in the blank answer");
+    
+    // Allow Enter key to submit
+    input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const userAnswer = input.value.trim();
+        checkAnswer(userAnswer, q.answer);
+      }
+    });
 
     const submit = document.createElement("button");
-    submit.textContent = "Submit";
-    submit.className = "btn btn-primary";
+    submit.textContent = "Submit Answer";
+    submit.className = "btn btn-primary btn-lg";
 
     submit.addEventListener("click", () => {
       const userAnswer = input.value.trim();
@@ -731,17 +891,25 @@ function renderQuizQuestion() {
     wrapper.appendChild(input);
     wrapper.appendChild(submit);
     quizOptionsEl.appendChild(wrapper);
+    
+    // Focus input
+    setTimeout(() => input.focus(), 100);
     return;
   }
 
   const options = q.type === "tf" ? ["True", "False"] : q.options;
-  options.forEach((opt) => {
+  const optionsGrid = document.createElement("div");
+  optionsGrid.className = "quiz-options-grid";
+  
+  options.forEach((opt, index) => {
     const btn = document.createElement("button");
     btn.className = "quiz-option-btn";
-    btn.textContent = opt;
+    btn.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + index)}</span><span class="option-text">${opt}</span>`;
     btn.addEventListener("click", () => checkAnswer(opt, q.answer));
-    quizOptionsEl.appendChild(btn);
+    optionsGrid.appendChild(btn);
   });
+  
+  quizOptionsEl.appendChild(optionsGrid);
 }
 
 function normalizeAnswer(value) {
@@ -752,19 +920,61 @@ function checkAnswer(userAnswer, correctAnswer) {
   const q = activeQuestions[activeQuestionIndex];
   const isCorrect = normalizeAnswer(userAnswer) === normalizeAnswer(correctAnswer);
 
+  // Disable all options
+  const allButtons = quizOptionsEl.querySelectorAll("button");
+  allButtons.forEach((btn) => btn.disabled = true);
+
   if (isCorrect) {
     activeScore += 1;
-    quizFeedbackEl.innerHTML = `<p class="correct">✅ Correct!</p><p>${q.explanation}</p>`;
+    currentStreak += 1;
+    quizFeedbackEl.className = "quiz-feedback correct";
+    quizFeedbackEl.innerHTML = `
+      <div class="feedback-header">
+        <span class="feedback-icon">🎉</span>
+        <span class="feedback-title">Correct!</span>
+        ${currentStreak > 2 ? `<span class="streak-badge">🔥 ${currentStreak} streak!</span>` : ""}
+      </div>
+      <p class="feedback-explanation">${q.explanation}</p>
+    `;
+    
+    // Highlight correct option
+    allButtons.forEach(btn => {
+      if (btn.textContent.includes(userAnswer) || 
+          (q.type === "fill" && btn.classList.contains("btn-primary"))) {
+        btn.classList.add("correct-selected");
+      }
+    });
   } else {
-    quizFeedbackEl.innerHTML = `<p class="incorrect">❌ Not quite.</p><p>Correct answer: <strong>${correctAnswer}</strong></p><p>${q.explanation}</p>`;
+    currentStreak = 0;
+    wrongAnswers.push(q);
     bumpWeakTopic(q.topicId);
+    
+    quizFeedbackEl.className = "quiz-feedback incorrect";
+    quizFeedbackEl.innerHTML = `
+      <div class="feedback-header">
+        <span class="feedback-icon">❌</span>
+        <span class="feedback-title">Not quite</span>
+      </div>
+      <p class="correct-answer">Correct answer: <strong>${correctAnswer}</strong></p>
+      <p class="feedback-explanation">${q.explanation}</p>
+    `;
+    
+    // Highlight correct and wrong options
+    allButtons.forEach(btn => {
+      const btnText = btn.querySelector(".option-text")?.textContent || btn.textContent;
+      if (normalizeAnswer(btnText) === normalizeAnswer(correctAnswer)) {
+        btn.classList.add("correct-answer-highlight");
+      } else if (normalizeAnswer(btnText) === normalizeAnswer(userAnswer)) {
+        btn.classList.add("wrong-answer-highlight");
+      }
+    });
   }
 
-  nextQuestionBtn.style.display = "inline-block";
-  const allButtons = quizOptionsEl.querySelectorAll("button");
-  allButtons.forEach((btn) => {
-    btn.disabled = true;
-  });
+  updateQuizProgress();
+  nextQuestionBtn.style.display = "inline-flex";
+  nextQuestionBtn.innerHTML = activeQuestionIndex < activeQuestions.length - 1 
+    ? `Next Question →` 
+    : `See Results 🎉`;
 }
 
 function finishQuiz() {
@@ -781,13 +991,101 @@ function finishQuiz() {
   studyState.quizHistory[activeQuizChapter].push(attempt);
   saveState();
 
-  quizQuestionEl.textContent = `Quiz Complete! Score: ${activeScore}/${total} (${scorePercent}%)`;
-  quizOptionsEl.innerHTML = "";
-  quizFeedbackEl.innerHTML = "Great job. Review weak topics in Study Mode for improvement.";
+  // Hide quiz area, show results
+  quizArea.style.display = "none";
+  quizStats.style.display = "none";
+  quizProgressBar.style.display = "none";
   nextQuestionBtn.style.display = "none";
+  quizResults.style.display = "block";
+
+  // Animate score
+  finalScoreEl.textContent = "0%";
+  let currentDisplay = 0;
+  const increment = scorePercent / 50;
+  const scoreAnimation = setInterval(() => {
+    currentDisplay += increment;
+    if (currentDisplay >= scorePercent) {
+      currentDisplay = scorePercent;
+      clearInterval(scoreAnimation);
+    }
+    finalScoreEl.textContent = `${Math.round(currentDisplay)}%`;
+    
+    // Color based on score
+    if (currentDisplay >= 80) finalScoreEl.style.color = "#22c55e";
+    else if (currentDisplay >= 60) finalScoreEl.style.color = "#f59e0b";
+    else finalScoreEl.style.color = "#ef4444";
+  }, 20);
+
+  // Score breakdown
+  scoreBreakdownEl.innerHTML = `
+    <div class="breakdown-item">
+      <span class="breakdown-label">Correct</span>
+      <span class="breakdown-value correct">${activeScore}</span>
+    </div>
+    <div class="breakdown-item">
+      <span class="breakdown-label">Incorrect</span>
+      <span class="breakdown-value incorrect">${total - activeScore}</span>
+    </div>
+    <div class="breakdown-item">
+      <span class="breakdown-label">Total</span>
+      <span class="breakdown-value">${total}</span>
+    </div>
+  `;
+
+  // Performance message
+  let message = "";
+  let emoji = "";
+  if (scorePercent >= 90) {
+    emoji = "🏆";
+    message = "Outstanding! You're a Web Technologies master!";
+  } else if (scorePercent >= 80) {
+    emoji = "⭐";
+    message = "Great job! You really know your stuff!";
+  } else if (scorePercent >= 60) {
+    emoji = "👍";
+    message = "Good work! Keep studying to improve further.";
+  } else {
+    emoji = "📚";
+    message = "Keep practicing! Review the topics and try again.";
+  }
+  performanceMessageEl.innerHTML = `${emoji} ${message}`;
+
+  // Show review button only if there were mistakes
+  reviewMistakesBtn.style.display = wrongAnswers.length > 0 ? "inline-flex" : "none";
 
   renderScoreHistory(activeQuizChapter);
   refreshDashboard();
+}
+
+function restartQuiz() {
+  quizChapterSelect.parentElement.style.display = "flex";
+  quizResults.style.display = "none";
+  scoreHistoryEl.style.display = "block";
+  quizStats.style.display = "none";
+  quizProgressBar.style.display = "none";
+  quizArea.style.display = "none";
+}
+
+function reviewMistakes() {
+  if (wrongAnswers.length === 0) return;
+  
+  isReviewMode = true;
+  activeQuestions = [...wrongAnswers];
+  activeQuestionIndex = 0;
+  activeScore = 0;
+  currentStreak = 0;
+  wrongAnswers = [];
+
+  quizResults.style.display = "none";
+  quizStats.style.display = "flex";
+  quizProgressBar.style.display = "block";
+  quizArea.style.display = "block";
+  
+  // Update progress for review mode
+  quizProgressText.textContent = `Review 1 / ${activeQuestions.length}`;
+  
+  updateQuizProgress();
+  renderQuizQuestion();
 }
 
 function renderScoreHistory(chapterId) {
@@ -797,14 +1095,23 @@ function renderScoreHistory(chapterId) {
     return;
   }
 
-  const items = history.slice(-5).map((attempt) => {
+  const items = history.slice(-5).reverse().map((attempt, index) => {
     const when = new Date(attempt.date).toLocaleDateString();
-    return `<li>${when}: ${attempt.score}/${attempt.total} (${attempt.percent}%)</li>`;
+    const isLatest = index === 0;
+    const scoreClass = attempt.percent >= 80 ? "high" : attempt.percent >= 60 ? "medium" : "low";
+    return `
+      <li class="score-item ${scoreClass} ${isLatest ? "latest" : ""}">
+        <span class="score-date">${when}</span>
+        <span class="score-value">${attempt.score}/${attempt.total}</span>
+        <span class="score-percent">${attempt.percent}%</span>
+        ${isLatest ? "<span class='latest-badge'>Latest</span>" : ""}
+      </li>
+    `;
   }).join("");
 
   scoreHistoryEl.innerHTML = `
-    <h3>Recent Scores</h3>
-    <ul>${items}</ul>
+    <h3>📈 Score History</h3>
+    <ul class="score-list">${items}</ul>
   `;
 }
 
@@ -813,7 +1120,10 @@ nextQuestionBtn.addEventListener("click", () => {
   activeQuestionIndex += 1;
   nextQuestionBtn.style.display = "none";
   renderQuizQuestion();
+  updateQuizProgress();
 });
+restartQuizBtn.addEventListener("click", restartQuiz);
+reviewMistakesBtn.addEventListener("click", reviewMistakes);
 
 // ===== Checkpoint: Interactive Demos =====
 // After this section, students can experiment visually with key concepts.
