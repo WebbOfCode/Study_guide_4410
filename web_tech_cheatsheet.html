@@ -1,0 +1,217 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.sheet { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 20px; }
+.sheet-title { text-align: center; font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.sheet-sub { text-align: center; font-size: 12px; color: var(--color-text-tertiary); margin-bottom: 16px; letter-spacing: 0.05em; }
+.divider-teal { height: 3px; background: #5DCAA5; border-radius: 2px; width: 120px; display: inline-block; }
+.divider-coral { height: 3px; background: #F0997B; border-radius: 2px; width: 120px; display: inline-block; }
+.top-dividers { text-align: center; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 20px; }
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.col { display: flex; flex-direction: column; gap: 8px; }
+.sec-header { font-size: 11px; font-weight: 500; padding: 5px 10px; border-radius: 20px; text-align: center; margin-bottom: 4px; }
+.sec-teal { background: #E1F5EE; color: #085041; }
+.sec-blue { background: #E6F1FB; color: #0C447C; }
+.sec-coral { background: #FAECE7; color: #712B13; }
+.sec-purple { background: #EEEDFE; color: #3C3489; }
+.sec-green { background: #EAF3DE; color: #27500A; }
+.sec-amber { background: #FAEEDA; color: #633806; }
+.sec-pink { background: #FBEAF0; color: #72243E; }
+.sec-gray { background: #F1EFE8; color: #444441; }
+.qa { border-bottom: 0.5px solid var(--color-border-tertiary); padding-bottom: 5px; margin-bottom: 3px; }
+.q { font-size: 10px; color: var(--color-text-secondary); line-height: 1.4; }
+.a { font-size: 11px; color: var(--color-text-primary); font-weight: 500; line-height: 1.4; margin-top: 1px; font-family: var(--font-mono); }
+.a-plain { font-size: 11px; color: var(--color-text-primary); font-weight: 500; line-height: 1.4; margin-top: 1px; font-family: var(--font-sans); }
+.qa-fancy {
+  border: 1px solid var(--color-border-tertiary);
+  border-radius: 10px;
+  padding: 8px;
+  margin-bottom: 8px;
+  background: linear-gradient(145deg, rgba(93, 202, 165, 0.08), rgba(240, 153, 123, 0.08));
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+.qa-fancy .q {
+  font-size: 10px;
+  font-weight: 600;
+  color: #5a250f;
+  margin-bottom: 4px;
+}
+.qa-fancy .a,
+.qa-fancy .a-plain {
+  margin-top: 3px;
+}
+.qa-fancy .a {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 6px;
+  overflow-x: auto;
+}
+.qa-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: #7a3f17;
+  border-radius: 999px;
+  padding: 2px 7px;
+  margin-bottom: 4px;
+}
+@media (prefers-color-scheme: dark) {
+  .sec-teal { background: #085041; color: #9FE1CB; }
+  .sec-blue { background: #0C447C; color: #B5D4F4; }
+  .sec-coral { background: #712B13; color: #F5C4B3; }
+  .sec-purple { background: #3C3489; color: #CECBF6; }
+  .sec-green { background: #27500A; color: #C0DD97; }
+  .sec-amber { background: #633806; color: #FAC775; }
+  .sec-pink { background: #72243E; color: #F4C0D1; }
+  .sec-gray { background: #444441; color: #D3D1C7; }
+}
+</style>
+<div class="sheet">
+  <h2 class="sheet-title">Web Technologies Cheatsheet</h2>
+  <p class="sheet-sub">CSCI 4410 — Quiz 3 · Quiz 4 · Quiz 5</p>
+  <div class="top-dividers"><span class="divider-teal"></span><span class="divider-coral"></span></div>
+
+  <div class="grid">
+
+    <div class="col">
+      <div class="sec-header sec-teal">jQuery</div>
+      <div class="qa"><div class="q">What is jQuery?</div><div class="a-plain">JS library for DOM manipulation & events</div></div>
+      <div class="qa"><div class="q">jQuery shorthand alias?</div><div class="a">$</div></div>
+      <div class="qa"><div class="q">Run code after DOM loads?</div><div class="a">$(document).ready()</div></div>
+      <div class="qa"><div class="q">Select class .q13?</div><div class="a">$(".q13")</div></div>
+
+      <div class="qa qa-fancy"><div class="qa-badge">Code Challenge</div><div class="q">Hide clicked paragraph?</div><div class="a">
+        $(document).ready(function(){<br>
+        <mark>$("p").click(function(){<br>
+$(this).hide();<br>
+});</mark><br>
+});<br></div></div>
+
+
+
+
+
+      <div class="qa qa-fancy"><div class="qa-badge">Code Challenge</div><div class="q">Hide all &lt;p&gt; on mouseenter?</div><div class="a">$(document).ready(<mark>function(){<br>
+$("p").mouseenter(function(){<br>
+$("p").hide();<br>
+});<br></mark>
+});<br></div></div>
+
+      <div class="sec-header sec-blue" style="margin-top:8px;">React basics</div>
+      <div class="qa"><div class="q">What is React?</div><div class="a-plain">JS library for reusable UI components (Meta)</div></div>
+      <div class="qa"><div class="q">Create new React app?</div><div class="a">npx create-react-app my-app</div></div>
+      <div class="qa"><div class="q">What is JSX?</div><div class="a-plain">Syntax extension — HTML-like markup in JS</div></div>
+      <div class="qa"><div class="q">Correct way to update <strong>state</strong>?</div><div class="a">setValue(newValue)</div></div>
+      <div class="qa"><div class="q">Button event handler syntax?</div><div class="a">onClick={handleClick}</div></div>
+      <div class="qa"><div class="q">Capture input value?</div><div class="a">event.target.value</div></div>
+    </div>
+
+    <div class="col">
+      <div class="sec-header sec-purple">React Router & hooks</div>
+      <div class="qa"><div class="q">Purpose of React Router?</div><div class="a-plain">Client-side nav without page reload</div></div>
+      <div class="qa"><div class="q">Wraps all routes?</div><div class="a">&lt;Routes&gt;</div></div>
+      <div class="qa"><div class="q">Defines a single route?</div><div class="a">&lt;Route&gt;</div></div>
+      <div class="qa"><div class="q">Navigational link component?</div><div class="a">&lt;Link&gt;</div></div>
+      <div class="qa"><div class="q">404 wildcard route path?</div><div class="a">path="*"</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">Hook</div><div class="q">Programmatic navigation hook?</div><div class="a"><mark>useNavigate()</mark></div></div>
+      <div class="qa"><div class="q">Purpose of useState?</div><div class="a-plain">Local state value + setter function</div></div>
+      <div class="qa"><div class="q">What are props?</div><div class="a-plain">Read-only data passed parent → child</div></div>
+      <div class="qa"><div class="q">posts/setPosts passed as props?</div><div class="a-plain">Child accesses + updates parent's state</div></div>
+
+      <div class="sec-header sec-coral" style="margin-top:8px;">React code patterns</div>
+      <div class="qa"><div class="q">Init state for name?</div><div class="a">const [name, setName] = useState("John Doe")</div></div>
+      <div class="qa"><div class="q">onChange update name?</div><div class="a">setName(e.target.value)</div></div>
+    </div>
+
+    <div class="col">
+      <div class="sec-header sec-amber">PHP fundamentals</div>
+      <div class="qa"><div class="q">PHP stands for?</div><div class="a-plain">PHP: Hypertext Preprocessor</div></div>
+      <div class="qa"><div class="q">PHP delimiters?</div><div class="a">&lt;?php ... ?&gt;</div></div>
+      <div class="qa"><div class="q">Print output?</div><div class="a">echo "Hello World!";</div></div>
+      <div class="qa"><div class="q">Variable prefix?</div><div class="a">$</div></div>
+      <div class="qa"><div class="q">End a statement?</div><div class="a">;</div></div>
+      <div class="qa"><div class="q">Define a function?</div><div class="a">function myFn() {}</div></div>
+      <div class="qa"><div class="q">Single-line comment?</div><div class="a">// or #</div></div>
+      <div class="qa"><div class="q">Multi-line comment?</div><div class="a">/* ... */</div></div>
+      <div class="qa"><div class="q">Strict equality (value + type)?</div><div class="a">===</div></div>
+      <div class="qa"><div class="q">PHP files can mix HTML?</div><div class="a-plain">True — PHP, HTML, CSS, JS all allowed</div></div>
+      <div class="qa"><div class="q">$GLOBALS['y'] = $GLOBALS['x']++ when x=5?</div><div class="a">$y = 5 (assigns then increments)</div></div>
+      <div class="qa"><div class="q">Single vs double quotes?</div><div class="a-plain">Both work for strings</div></div>
+    </div>
+
+    <div class="col">
+      <div class="sec-header sec-green">PHP forms & security</div>
+      <div class="qa"><div class="q">Server info superglobal?</div><div class="a">$_SERVER</div></div>
+      <div class="qa"><div class="q">Required before $_SESSION?</div><div class="a">session_start()</div></div>
+      <div class="qa"><div class="q">Read + parse JSON file?</div><div class="a">json_decode(file_get_contents("f.json"), true)</div></div>
+      <div class="qa"><div class="q">Prevent XSS?</div><div class="a">htmlspecialchars()</div></div>
+      <div class="qa"><div class="q">Sensitive form data method?</div><div class="a">method="post"</div></div>
+      <div class="qa"><div class="q">Block empty form submit?</div><div class="a">required (HTML attribute)</div></div>
+      <div class="qa"><div class="q">Access POST field "email"?</div><div class="a">$_POST["email"]</div></div>
+      <div class="qa"><div class="q">Loop array syntax?</div><div class="a">foreach ($arr as $item)</div></div>
+      <div class="qa"><div class="q">Hash a password?</div><div class="a">password_hash($pw, PASSWORD_DEFAULT)</div></div>
+      <div class="qa"><div class="q">Verify a password hash?</div><div class="a">password_verify($plain, $hash)</div></div>
+      <div class="qa"><div class="q">Form submits to PHP file?</div><div class="a">action="quiz4.php"</div></div>
+
+      <div class="qa qa-fancy">
+        <div class="qa-badge">Open Ended - Full Script</div>
+        <div class="q">PHP Programming Question: Creating an Account with Password Hashing. Write a PHP script that accepts username/password via POST, hashes using password_hash() with PASSWORD_DEFAULT, and displays username plus hashed password (not plain password).</div>
+        <div class="a">&lt;?php<br>
+    $username = "";<br>
+    $hashedPassword = "";<br>
+    $success = "";<br>
+    <br>
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {<br>
+    &nbsp;&nbsp;// Get submitted values<br>
+    &nbsp;&nbsp;$username = htmlspecialchars($_POST["username"]);<br>
+    &nbsp;&nbsp;$password = $_POST["password"];<br>
+    <br>
+    &nbsp;&nbsp;// Hash password before storing/displaying<br>
+    &nbsp;&nbsp;$hashedPassword = password_hash($password, PASSWORD_DEFAULT);<br>
+    &nbsp;&nbsp;$success = "Account created!";<br>
+    }<br>
+    ?&gt;<br>
+    <br>
+    &lt;h2&gt;Create Account&lt;/h2&gt;<br>
+    &lt;form method="post"&gt;<br>
+    Username: &lt;input type="text" name="username" required&gt;&lt;br&gt;&lt;br&gt;<br>
+    Password: &lt;input type="password" name="password" required&gt;&lt;br&gt;&lt;br&gt;<br>
+    &lt;button type="submit"&gt;Register&lt;/button&gt;<br>
+    &lt;/form&gt;<br>
+    <br>
+    &lt;?php<br>
+    if (!empty($success)) {<br>
+    &nbsp;&nbsp;echo "&lt;h3&gt;$success&lt;/h3&gt;";<br>
+    &nbsp;&nbsp;echo "&lt;p&gt;&lt;strong&gt;Username:&lt;/strong&gt; " . htmlspecialchars($username) . "&lt;/p&gt;";<br>
+    &nbsp;&nbsp;echo "&lt;p&gt;&lt;strong&gt;Hashed Password:&lt;/strong&gt; " . htmlspecialchars($hashedPassword) . "&lt;/p&gt;";<br>
+    }<br>
+    ?&gt;</div>
+      </div>
+
+      <div class="sec-header sec-pink" style="margin-top:8px;">MySQL / SQL</div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Syntax</div><div class="q">Count rows?</div><div class="a">SELECT COUNT(*) FROM Persons</div></div>
+      <div class="qa"><div class="q">SQL stands for?</div><div class="a-plain">Structured Query Language</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Syntax</div><div class="q">Select one column?</div><div class="a">SELECT FirstName FROM Persons</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Filter</div><div class="q">Starts with "a"?</div><div class="a">WHERE FirstName LIKE 'a%'</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Syntax</div><div class="q">Unique values only?</div><div class="a">SELECT DISTINCT</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Sort</div><div class="q">Sort descending?</div><div class="a">ORDER BY FirstName DESC</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Write</div><div class="q">Insert a record?</div><div class="a">INSERT INTO t (col) VALUES ('v')</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Write</div><div class="q">Update a record?</div><div class="a">UPDATE t SET col='v' WHERE ...</div></div>
+      <div class="qa"><div class="q">SQL vs MySQL?</div><div class="a-plain">SQL = language; MySQL = software</div></div>
+      <div class="qa"><div class="q">RDBMS stores data in?</div><div class="a-plain">Tables with rows and columns</div></div>
+      <div class="qa"><div class="q">XAMPP default username?</div><div class="a">root</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">PHP + MySQL</div><div class="q">PHP MySQL OOP connection?</div><div class="a">new mysqli($host,$user,$pw,$db)</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Schema</div><div class="q">Auto-increment primary key?</div><div class="a">INT AUTO_INCREMENT PRIMARY KEY</div></div>
+      <div class="qa"><div class="q">Composite key?</div><div class="a-plain">Primary key from 2+ combined columns</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Schema</div><div class="q">Create a database?</div><div class="a">CREATE DATABASE school;</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">PHP + MySQL</div><div class="q">PHP query function?</div><div class="a">mysqli_query($conn, $sql)</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">PHP + MySQL</div><div class="q">Fetch row as array?</div><div class="a">mysqli_fetch_assoc($result)</div></div>
+    </div>
+
+  </div>
+</div>
