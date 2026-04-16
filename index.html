@@ -149,8 +149,7 @@ $("p").hide();<br>
       <div class="qa"><div class="q">PHP stands for?</div><div class="a-plain">PHP: Hypertext Preprocessor</div></div>
       <div class="qa"><div class="q">PHP delimiters?</div><div class="a">&lt;?php ... ?&gt;</div></div>
       <div class="qa"><div class="q">Print output?</div><div class="a">echo "Hello World!";</div></div>
-      <div class="qa"><div class="q">Variable prefix?</div><div class="a">$</div></div>
-      <div class="qa"><div class="q">End a statement?</div><div class="a">;</div></div>
+      <div class="qa"><div class="q">Variable prefix? ++++++++++ End a statement?</div><div class="a">$ ++++++++++ ;</div></div>
       <div class="qa"><div class="q">Define a function?</div><div class="a">function myFn() {}</div></div>
       <div class="qa"><div class="q">PHP comment syntax (single + multi-line)?</div><div class="a">// or #, and /* ... */</div></div>
       <div class="qa"><div class="q">Strict equality (value + type)?</div><div class="a">===</div></div>
@@ -163,7 +162,7 @@ $("p").hide();<br>
       <div class="sec-header sec-green">PHP forms & security</div>
       <div class="qa"><div class="q">Server info superglobal?</div><div class="a">$_SERVER</div></div>
       <div class="qa"><div class="q">Required before $_SESSION?</div><div class="a">session_start()</div></div>
-      <div class="qa"><div class="q">Read + parse JSON file?</div><div class="a">json_decode(file_get_contents("f.json"), true)</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">Miss This One</div><div class="q">Read + parse JSON file?</div><div class="a"><mark>json_decode(file_get_contents("f.json"), true)</mark></div></div>
       <div class="qa"><div class="q">Prevent XSS?</div><div class="a">htmlspecialchars()</div></div>
       <div class="qa"><div class="q">Sensitive form data method?</div><div class="a">method="post"</div></div>
       <div class="qa"><div class="q">Block empty form submit?</div><div class="a">required (HTML attribute)</div></div>
@@ -172,6 +171,22 @@ $("p").hide();<br>
       <div class="qa"><div class="q">Hash a password?</div><div class="a">password_hash($pw, PASSWORD_DEFAULT)</div></div>
       <div class="qa"><div class="q">Verify a password hash?</div><div class="a">password_verify($plain, $hash)</div></div>
       <div class="qa"><div class="q">Form submits to PHP file?</div><div class="a">action="quiz4.php"</div></div>
+
+      <div class="qa qa-fancy"><div class="qa-badge">background_vector</div><div class="q">Underline</div><div class="a">Answer Explanation<br><br>
+      (1) quiz4.html<br>
+      &lt;form method="post" action="quiz4.php"&gt;<br>
+      First Name: &lt;input type="text" name="fname"&gt; &lt;br&gt;<br>
+      Last Name: &lt;input type="text" name="lname"&gt; &lt;br&gt;<br>
+      &lt;input type="submit"&gt;<br>
+      &lt;/form&gt;<br><br>
+      (2) quiz4.php<br>
+      &lt;?php<br>
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {<br>
+      &nbsp;&nbsp;$firstName = $_POST["fname"];<br>
+      &nbsp;&nbsp;$lastName = $_POST["lname"];<br>
+      &nbsp;&nbsp;echo "My name is " . $firstName . " " . $lastName . ".";<br>
+      }<br>
+      ?&gt;</div></div>
 
     </div>
 
