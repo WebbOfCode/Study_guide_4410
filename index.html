@@ -72,10 +72,23 @@ body { font-family: var(--font-sans); }
 }
 .sql-full-span {
   grid-column: 1 / -1;
+  width: 100%;
+}
+.qa-row-halves {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.qa-row-halves .qa {
+  margin-bottom: 0;
 }
 @media (max-width: 900px) {
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bottom-sql-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sql-full-span {
+    width: 100%;
+  }
+  .qa-row-halves { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .grid { grid-template-columns: 1fr; }
@@ -142,6 +155,12 @@ $("p").hide();<br>
       <div class="sec-header sec-coral" style="margin-top:8px;">React code patterns</div>
       <div class="qa"><div class="q">Init state for name?</div><div class="a">const [name, setName] = useState("John Doe")</div></div>
       <div class="qa"><div class="q">onChange update name?</div><div class="a">setName(e.target.value)</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">React Challenge</div><div class="q">Answer only</div><div class="a"><mark>const [name, setName] = useState("John Doe")</mark><br>
+      <mark>&lt;ProfileHeader name={name} age={25} /&gt;</mark><br>
+      <mark>&lt;ProfileEditor name={name} setName={setName} /&gt;</mark><br>
+      <mark>function ProfileHeader({ name, age }) { ... }</mark><br>
+      <mark>function ProfileEditor({ name, setName }) { ... }</mark><br>
+      <mark>onChange={(e) =&gt; setName(e.target.value)}</mark></div></div>
     </div>
 
     <div class="col">
@@ -151,6 +170,11 @@ $("p").hide();<br>
       <div class="qa"><div class="q">Print output?</div><div class="a">echo "Hello World!";</div></div>
       <div class="qa"><div class="q">Variable prefix? ++++++++++ End a statement?</div><div class="a">$ ++++++++++ ;</div></div>
       <div class="qa"><div class="q">Define a function?</div><div class="a">function myFn() {}</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">quiz4.html</div><div class="q">Form (POST to quiz4.php)</div><div class="a">&lt;form method="post" action="quiz4.php"&gt;<br>
+      First Name: &lt;input type="text" name="fname"&gt; &lt;br&gt;<br>
+      Last Name: &lt;input type="text" name="lname"&gt; &lt;br&gt;<br>
+      &lt;input type="submit"&gt;<br>
+      &lt;/form&gt;</div></div>
       <div class="qa"><div class="q">PHP comment syntax (single + multi-line)?</div><div class="a">// or #, and /* ... */</div></div>
       <div class="qa"><div class="q">Strict equality (value + type)?</div><div class="a">===</div></div>
       <div class="qa"><div class="q">PHP files can mix HTML?</div><div class="a-plain">True — PHP, HTML, CSS, JS all allowed</div></div>
@@ -173,13 +197,7 @@ $("p").hide();<br>
       <div class="qa"><div class="q">Form submits to PHP file?</div><div class="a">action="quiz4.php"</div></div>
 
       <div class="qa qa-fancy"><div class="qa-badge">background_vector</div><div class="q">Underline</div><div class="a">Answer Explanation<br><br>
-      (1) quiz4.html<br>
-      &lt;form method="post" action="quiz4.php"&gt;<br>
-      First Name: &lt;input type="text" name="fname"&gt; &lt;br&gt;<br>
-      Last Name: &lt;input type="text" name="lname"&gt; &lt;br&gt;<br>
-      &lt;input type="submit"&gt;<br>
-      &lt;/form&gt;<br><br>
-      (2) quiz4.php<br>
+      (1) quiz4.php<br>
       &lt;?php<br>
       if ($_SERVER["REQUEST_METHOD"] == "POST") {<br>
       &nbsp;&nbsp;$firstName = $_POST["fname"];<br>
@@ -209,13 +227,21 @@ $("p").hide();<br>
       <div class="qa"><div class="q">RDBMS stores data in?</div><div class="a-plain">Tables with rows and columns</div></div>
       <div class="qa"><div class="q">Composite key?</div><div class="a-plain">Primary key from 2+ combined columns</div></div>
       <div class="qa qa-fancy"><div class="qa-badge">PHP + MySQL</div><div class="q">PHP MySQL OOP connection?</div><div class="a">new mysqli($host,$user,$pw,$db)</div></div>
-      <div class="qa qa-fancy"><div class="qa-badge">PHP + MySQL</div><div class="q">PHP query function?</div><div class="a">mysqli_query($conn, $sql)</div></div>
-      <div class="qa qa-fancy"><div class="qa-badge">PHP + MySQL</div><div class="q">Fetch row as array?</div><div class="a">mysqli_fetch_assoc($result)</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">PHP + MySQL</div><div class="q">SELECT all Students and echo rows as HTML table (essentials)</div><div class="a"><mark>$sql = "SELECT * FROM students";</mark><br>
+      <mark>$result = mysqli_query($conn, $sql);</mark><br>
+      <mark>echo "&lt;table border='1'&gt;";</mark><br>
+      <mark>while ($row = mysqli_fetch_assoc($result)) {</mark><br>
+      <mark>&nbsp;&nbsp;echo "&lt;tr&gt;";</mark><br>
+      <mark>&nbsp;&nbsp;foreach ($row as $value) { echo "&lt;td&gt;" . $value . "&lt;/td&gt;"; }</mark><br>
+      <mark>&nbsp;&nbsp;echo "&lt;/tr&gt;";</mark><br>
+      <mark>}</mark><br>
+      <mark>echo "&lt;/table&gt;";</mark></div></div>
 
-      <div class="qa qa-fancy sql-full-span">
-        <div class="qa-badge">Open Ended - Full Script</div>
-        <div class="q">PHP Programming Question: Creating an Account with Password Hashing. Write a PHP script that accepts username/password via POST, hashes using password_hash() with PASSWORD_DEFAULT, and displays username plus hashed password (not plain password).</div>
-        <div class="a">&lt;?php<br>
+      <div class="sql-full-span qa-row-halves">
+        <div class="qa qa-fancy">
+          <div class="qa-badge">Open Ended - Full Script</div>
+          <div class="q">PHP Programming Question: Creating an Account with Password Hashing. Write a PHP script that accepts username/password via POST, hashes using password_hash() with PASSWORD_DEFAULT, and displays username plus hashed password (not plain password).</div>
+          <div class="a">&lt;?php<br>
     $username = "";<br>
     $hashedPassword = "";<br>
     $success = "";<br>
@@ -245,6 +271,43 @@ $("p").hide();<br>
     &nbsp;&nbsp;echo "&lt;p&gt;&lt;strong&gt;Hashed Password:&lt;/strong&gt; " . htmlspecialchars($hashedPassword) . "&lt;/p&gt;";<br>
     }<br>
     ?&gt;</div>
+        </div>
+
+        <div class="qa qa-fancy">
+          <div class="qa-badge">Open Ended - Full Script</div>
+          <div class="q">Please finish the PHP code to SELECT all the records from table Students, and echo all records as a table in the webpage.</div>
+          <div class="a">&lt;?php<br>
+    $servername = "localhost";<br>
+    $username = "root";<br>
+    $password = "";<br>
+    $database = "csc4410";<br>
+    // Create connection<br>
+    $conn = new mysqli($servername, $username, $password, $database);<br>
+    // Check connection<br>
+    if ($conn-&gt;connect_error) {<br>
+    &nbsp;&nbsp;die("Connection failed: " . $conn-&gt;connect_error);<br>
+    }<br>
+    // write the query<br>
+    $sql = "SELECT * FROM students";<br>
+    // make query and get result<br>
+    $result = mysqli_query($conn, $sql);<br>
+    // use table to display the database table<br>
+    echo "&lt;table border='1'&gt;";<br>
+    // table rows<br>
+    while ($row = mysqli_fetch_assoc($result)) {<br>
+    &nbsp;&nbsp;echo "&lt;tr&gt;";<br>
+    &nbsp;&nbsp;foreach ($row as $value) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;echo "&lt;td&gt;" . $value . "&lt;/td&gt;";<br>
+    &nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;echo "&lt;/tr&gt;";<br>
+    }<br>
+    echo "&lt;/table&gt;";<br>
+    $conn-&gt;close();<br>
+    ?&gt;<br><br>
+    Answer explanation<br>
+    (1) $result = mysqli_query($conn, $sql);<br>
+    (2) while ($row = mysqli_fetch_assoc($result)) { ... }</div>
+        </div>
       </div>
     </div>
   </div>
