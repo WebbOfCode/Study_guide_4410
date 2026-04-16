@@ -60,6 +60,27 @@ body { font-family: var(--font-sans); }
   padding: 2px 7px;
   margin-bottom: 4px;
 }
+.bottom-sql {
+  margin-top: 14px;
+  border-top: 1px solid var(--color-border-tertiary);
+  padding-top: 12px;
+}
+.bottom-sql-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.sql-full-span {
+  grid-column: 1 / -1;
+}
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bottom-sql-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+  .bottom-sql-grid { grid-template-columns: 1fr; }
+}
 @media (prefers-color-scheme: dark) {
   .sec-teal { background: #085041; color: #9FE1CB; }
   .sec-blue { background: #0C447C; color: #B5D4F4; }
@@ -81,11 +102,10 @@ body { font-family: var(--font-sans); }
     <div class="col">
       <div class="sec-header sec-teal">jQuery</div>
       <div class="qa"><div class="q">What is jQuery?</div><div class="a-plain">JS library for DOM manipulation & events</div></div>
-      <div class="qa"><div class="q">jQuery shorthand alias?</div><div class="a">$</div></div>
       <div class="qa"><div class="q">Run code after DOM loads?</div><div class="a">$(document).ready()</div></div>
-      <div class="qa"><div class="q">Select class .q13?</div><div class="a">$(".q13")</div></div>
+      <div class="qa"><div class="q">Select a class .q13?</div><div class="a">$(".q13")</div></div>
 
-      <div class="qa qa-fancy"><div class="qa-badge">Code Challenge</div><div class="q">Hide clicked paragraph?</div><div class="a">
+      <div class="qa qa-fancy"><div class="qa-badge">HIDE PARAGRAPH</div><div class="q"></div><div class="a">
         $(document).ready(function(){<br>
         <mark>$("p").click(function(){<br>
 $(this).hide();<br>
@@ -96,16 +116,14 @@ $(this).hide();<br>
 
 
 
-      <div class="qa qa-fancy"><div class="qa-badge">Code Challenge</div><div class="q">Hide all &lt;p&gt; on mouseenter?</div><div class="a">$(document).ready(<mark>function(){<br>
+      <div class="qa qa-fancy"><div class="qa-badge">Hide para on mouse enter </div><div class="a">$(document).ready(<mark>function(){<br>
 $("p").mouseenter(function(){<br>
 $("p").hide();<br>
 });<br></mark>
 });<br></div></div>
 
       <div class="sec-header sec-blue" style="margin-top:8px;">React basics</div>
-      <div class="qa"><div class="q">What is React?</div><div class="a-plain">JS library for reusable UI components (Meta)</div></div>
       <div class="qa"><div class="q">Create new React app?</div><div class="a">npx create-react-app my-app</div></div>
-      <div class="qa"><div class="q">What is JSX?</div><div class="a-plain">Syntax extension — HTML-like markup in JS</div></div>
       <div class="qa"><div class="q">Correct way to update <strong>state</strong>?</div><div class="a">setValue(newValue)</div></div>
       <div class="qa"><div class="q">Button event handler syntax?</div><div class="a">onClick={handleClick}</div></div>
       <div class="qa"><div class="q">Capture input value?</div><div class="a">event.target.value</div></div>
@@ -114,9 +132,7 @@ $("p").hide();<br>
     <div class="col">
       <div class="sec-header sec-purple">React Router & hooks</div>
       <div class="qa"><div class="q">Purpose of React Router?</div><div class="a-plain">Client-side nav without page reload</div></div>
-      <div class="qa"><div class="q">Wraps all routes?</div><div class="a">&lt;Routes&gt;</div></div>
-      <div class="qa"><div class="q">Defines a single route?</div><div class="a">&lt;Route&gt;</div></div>
-      <div class="qa"><div class="q">Navigational link component?</div><div class="a">&lt;Link&gt;</div></div>
+      <div class="qa"><div class="q">Wraps all routes?          defines single route =</div><div class="a">&lt;Routes & route&gt;</div></div>
       <div class="qa"><div class="q">404 wildcard route path?</div><div class="a">path="*"</div></div>
       <div class="qa qa-fancy"><div class="qa-badge">Hook</div><div class="q">Programmatic navigation hook?</div><div class="a"><mark>useNavigate()</mark></div></div>
       <div class="qa"><div class="q">Purpose of useState?</div><div class="a-plain">Local state value + setter function</div></div>
@@ -158,7 +174,31 @@ $("p").hide();<br>
       <div class="qa"><div class="q">Verify a password hash?</div><div class="a">password_verify($plain, $hash)</div></div>
       <div class="qa"><div class="q">Form submits to PHP file?</div><div class="a">action="quiz4.php"</div></div>
 
-      <div class="qa qa-fancy">
+    </div>
+
+  </div>
+
+  <div class="bottom-sql">
+    <div class="sec-header sec-pink">MySQL / SQL (Bottom Half Drill Zone)</div>
+    <div class="bottom-sql-grid">
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Syntax</div><div class="q">Count rows?</div><div class="a">SELECT COUNT(*) FROM Persons</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Syntax</div><div class="q">Select one column?</div><div class="a">SELECT FirstName FROM Persons</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Filter</div><div class="q">Starts with "a"?</div><div class="a">WHERE FirstName LIKE 'a%'</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Syntax</div><div class="q">Unique values only?</div><div class="a">SELECT DISTINCT</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Sort</div><div class="q">Sort descending?</div><div class="a">ORDER BY FirstName DESC</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Write</div><div class="q">Insert a record?</div><div class="a">INSERT INTO t (col) VALUES ('v')</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Write</div><div class="q">Update a record?</div><div class="a">UPDATE t SET col='v' WHERE ...</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Schema</div><div class="q">Auto-increment primary key?</div><div class="a">INT AUTO_INCREMENT PRIMARY KEY</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">SQL Schema</div><div class="q">Create a database?</div><div class="a">CREATE DATABASE school;</div></div>
+      <div class="qa"><div class="q">SQL stands for?</div><div class="a-plain">Structured Query Language</div></div>
+      <div class="qa"><div class="q">SQL vs MySQL?</div><div class="a-plain">SQL = language; MySQL = software</div></div>
+      <div class="qa"><div class="q">RDBMS stores data in?</div><div class="a-plain">Tables with rows and columns</div></div>
+      <div class="qa"><div class="q">Composite key?</div><div class="a-plain">Primary key from 2+ combined columns</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">PHP + MySQL</div><div class="q">PHP MySQL OOP connection?</div><div class="a">new mysqli($host,$user,$pw,$db)</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">PHP + MySQL</div><div class="q">PHP query function?</div><div class="a">mysqli_query($conn, $sql)</div></div>
+      <div class="qa qa-fancy"><div class="qa-badge">PHP + MySQL</div><div class="q">Fetch row as array?</div><div class="a">mysqli_fetch_assoc($result)</div></div>
+
+      <div class="qa qa-fancy sql-full-span">
         <div class="qa-badge">Open Ended - Full Script</div>
         <div class="q">PHP Programming Question: Creating an Account with Password Hashing. Write a PHP script that accepts username/password via POST, hashes using password_hash() with PASSWORD_DEFAULT, and displays username plus hashed password (not plain password).</div>
         <div class="a">&lt;?php<br>
@@ -192,26 +232,6 @@ $("p").hide();<br>
     }<br>
     ?&gt;</div>
       </div>
-
-      <div class="sec-header sec-pink" style="margin-top:8px;">MySQL / SQL</div>
-      <div class="qa qa-fancy"><div class="qa-badge">SQL Syntax</div><div class="q">Count rows?</div><div class="a">SELECT COUNT(*) FROM Persons</div></div>
-      <div class="qa"><div class="q">SQL stands for?</div><div class="a-plain">Structured Query Language</div></div>
-      <div class="qa qa-fancy"><div class="qa-badge">SQL Syntax</div><div class="q">Select one column?</div><div class="a">SELECT FirstName FROM Persons</div></div>
-      <div class="qa qa-fancy"><div class="qa-badge">SQL Filter</div><div class="q">Starts with "a"?</div><div class="a">WHERE FirstName LIKE 'a%'</div></div>
-      <div class="qa qa-fancy"><div class="qa-badge">SQL Syntax</div><div class="q">Unique values only?</div><div class="a">SELECT DISTINCT</div></div>
-      <div class="qa qa-fancy"><div class="qa-badge">SQL Sort</div><div class="q">Sort descending?</div><div class="a">ORDER BY FirstName DESC</div></div>
-      <div class="qa qa-fancy"><div class="qa-badge">SQL Write</div><div class="q">Insert a record?</div><div class="a">INSERT INTO t (col) VALUES ('v')</div></div>
-      <div class="qa qa-fancy"><div class="qa-badge">SQL Write</div><div class="q">Update a record?</div><div class="a">UPDATE t SET col='v' WHERE ...</div></div>
-      <div class="qa"><div class="q">SQL vs MySQL?</div><div class="a-plain">SQL = language; MySQL = software</div></div>
-      <div class="qa"><div class="q">RDBMS stores data in?</div><div class="a-plain">Tables with rows and columns</div></div>
-      <div class="qa"><div class="q">XAMPP default username?</div><div class="a">root</div></div>
-      <div class="qa qa-fancy"><div class="qa-badge">PHP + MySQL</div><div class="q">PHP MySQL OOP connection?</div><div class="a">new mysqli($host,$user,$pw,$db)</div></div>
-      <div class="qa qa-fancy"><div class="qa-badge">SQL Schema</div><div class="q">Auto-increment primary key?</div><div class="a">INT AUTO_INCREMENT PRIMARY KEY</div></div>
-      <div class="qa"><div class="q">Composite key?</div><div class="a-plain">Primary key from 2+ combined columns</div></div>
-      <div class="qa qa-fancy"><div class="qa-badge">SQL Schema</div><div class="q">Create a database?</div><div class="a">CREATE DATABASE school;</div></div>
-      <div class="qa qa-fancy"><div class="qa-badge">PHP + MySQL</div><div class="q">PHP query function?</div><div class="a">mysqli_query($conn, $sql)</div></div>
-      <div class="qa qa-fancy"><div class="qa-badge">PHP + MySQL</div><div class="q">Fetch row as array?</div><div class="a">mysqli_fetch_assoc($result)</div></div>
     </div>
-
   </div>
 </div>
